@@ -1,0 +1,15 @@
+//// UTILS ////
+@import "./utils/reset";
+@import "./utils/general";
+@import "./utils/fonts";
+@import "./utils/colors";
+@import "./utils/breakpoints";
+@import "./utils/animations";
+
+//// ATOMS ////
+
+//// MOLECULES ////
+@import "./molecules/sidebar";
+
+//// PAGES ////
+@import "./pages/dashboard";

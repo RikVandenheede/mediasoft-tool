@@ -1,0 +1,53 @@
+@import "./fonts";
+@import "./colors";
+
+@mixin fontStyle($font, $color, $size, $weight) {
+  font-family: $font;
+  color: $color;
+  font-size: $size;
+  font-weight: $weight;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1 {
+  @include fontStyle($font-primary, $color-primary, 2rem, bolder);
+}
+h2 {
+  @include fontStyle($font-primary, $color-primary, 1.5rem, bolder);
+}
+h3 {
+  @include fontStyle($font-primary, $color-primary, 1.17rem, bolder);
+}
+h4 {
+  @include fontStyle($font-primary, $color-primary, 1rem, bolder);
+}
+h5 {
+  @include fontStyle($font-primary, $color-primary, 0.83rem, bolder);
+}
+h6 {
+  @include fontStyle($font-primary, $color-primary, 0.67rem, bolder);
+}
+
+p {
+  @include fontStyle($font-primary, $color-primary, 0.75rem, 400);
+}
+
+a {
+  cursor: pointer;
+}
+
+#root {
+  display: flex;
+
+  main {
+    padding: 50px;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+}
