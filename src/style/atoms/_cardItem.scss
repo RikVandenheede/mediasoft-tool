@@ -1,0 +1,48 @@
+@mixin flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card {
+  border-radius: 5px;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.07);
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: $color-accent-blue;
+  }
+
+  &-left {
+    @include flex;
+
+    &__icon {
+      align-self: flex-start;
+      height: 20px;
+      width: auto;
+      color: $color-primary;
+    }
+    &__name {
+    }
+    &__number {
+    }
+  }
+
+  &-right {
+    @include flex;
+
+    &__graph {
+      background-color: $color-accent-blue;
+      width: 50px;
+      height: 20px;
+    }
+    &__percent {
+      color: $color-accent-green;
+      align-self: flex-end;
+    }
+  }
+}

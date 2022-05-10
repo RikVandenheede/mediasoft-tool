@@ -18,7 +18,7 @@ export const Sidebar = () => {
 
       <section className="sidebar-navigation">
         <ul className="sidebar-navigation__list">
-          {menu.map((menuItem) => {
+          {menu?.map((menuItem) => {
             return (
               <li key={menuItem}>
                 <NavLink

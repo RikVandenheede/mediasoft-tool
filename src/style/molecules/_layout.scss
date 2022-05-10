@@ -1,0 +1,10 @@
+.layout {
+  padding: 50px;
+  width: 100%;
+  max-width: calc(1440px - 100px); // sidebar
+  margin: 0 auto;
+
+  &__title {
+    margin: 0 0 50px 0;
+  }
+}

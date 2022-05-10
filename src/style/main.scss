@@ -7,8 +7,10 @@
 @import "./utils/animations";
 
 //// ATOMS ////
+@import "./atoms/cardItem";
 
 //// MOLECULES ////
+@import "./molecules/layout";
 @import "./molecules/sidebar";
 
 //// PAGES ////

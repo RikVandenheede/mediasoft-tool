@@ -1,3 +1,17 @@
-// * {
-//   color: red;
-// }
+.dashboard-overview {
+  &__title {
+    margin: 0 0 20px 0;
+  }
+
+  &-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+
+    &__cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: auto;
+      grid-gap: 1em;
+    }
+  }
+}

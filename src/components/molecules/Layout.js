@@ -4,8 +4,8 @@ export const Layout = ({ className, title, children }) => {
   return (
     <>
       <Sidebar />
-      <main className={className}>
-        <h1>{title}</h1>
+      <main className={`layout ${className}`}>
+        <h1 className="layout__title">{title}</h1>
         {children}
       </main>
     </>
