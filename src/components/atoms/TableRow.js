@@ -1,0 +1,14 @@
+export const TableRow = ({ className, row }) => {
+  return (
+    <div className={className}>
+      <div className={`${className}__title`}>
+        <p>{row?.page}</p>
+      </div>
+      <div className={`${className}__categories`}>
+        {Object.entries(row?.categories[0]).map(([, value]) => (
+          <p>{value}</p>
+        ))}
+      </div>
+    </div>
+  );
+};

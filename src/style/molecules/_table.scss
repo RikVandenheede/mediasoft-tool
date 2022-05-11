@@ -1,0 +1,41 @@
+.table {
+  &-header {
+    height: 50px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f0f3ff;
+    border-radius: 5px 5px 0 0;
+
+    & p {
+      font-weight: bold;
+    }
+
+    &__categories {
+      display: flex;
+
+      & > p {
+        margin-left: 40px;
+      }
+    }
+  }
+
+  &-body {
+    &__row {
+      height: 50px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &__categories {
+        display: flex;
+
+        & > p {
+          margin-left: 40px;
+        }
+      }
+    }
+  }
+}
