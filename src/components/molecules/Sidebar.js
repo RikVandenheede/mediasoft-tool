@@ -31,11 +31,11 @@ export const Sidebar = () => {
                   }
                 >
                   {menuItem === "/" ? (
-                    <NavbarEye />
+                    <NavbarEye className="sidebar-navigation__listitem__svg" />
                   ) : menuItem === "audience" ? (
-                    <NavbarUser />
+                    <NavbarUser className="sidebar-navigation__listitem__svg" />
                   ) : (
-                    <NavbarSocial />
+                    <NavbarSocial className="sidebar-navigation__listitem__svg" />
                   )}
                 </NavLink>
               </li>

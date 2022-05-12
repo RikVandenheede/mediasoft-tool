@@ -36,6 +36,11 @@
       height: 50px;
       transition: all 0.3s;
 
+      &__svg {
+        height: auto;
+        width: 25px;
+      }
+
       &:hover {
         background-color: rgba(108, 93, 211, 0.1);
       }
