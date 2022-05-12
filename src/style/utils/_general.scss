@@ -33,7 +33,8 @@ h6 {
   @include fontStyle($font-primary, $color-primary, 0.67rem, bolder);
 }
 
-p {
+p,
+span {
   @include fontStyle($font-primary, $color-primary, 0.75rem, 400);
 }
 

@@ -1,2 +1,8 @@
-@keyframes test {
+@keyframes counterGlow {
+  0% {
+    box-shadow: 0px 2px 20px #5fdda0dc;
+  }
+  100% {
+    box-shadow: 0px 2px 35px #2af14bd3;
+  }
 }

@@ -78,19 +78,24 @@ export const Dashboard = () => {
           </section>
         </section>
         <section className="dashboard-bottom">
-          <h2 className="dashboard-bottom__title">
-            What pages do our users visit?
-          </h2>
-          <section className="dashboard-bottom__container">
-            <div>
-              <Table
-                title="Pages"
-                categories={tableHeaderCategories}
-                data={data}
-              />
+          <div>
+            <h2 className="dashboard-bottom__title">
+              What pages do our users visit?
+            </h2>
+            <Table
+              title="Pages"
+              categories={tableHeaderCategories}
+              data={data}
+            />
+          </div>
+          <div>
+            <h2 className="dashboard-bottom__title">Live Users</h2>
+            <div className="dashboard-bottom__live-container">
+              <div className="dashboard-bottom__live">
+                <span>14</span>
+              </div>
             </div>
-            <div></div>
-          </section>
+          </div>
         </section>
       </Layout>
     </>

@@ -24,12 +24,36 @@
 }
 
 .dashboard-bottom {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  column-gap: 1em;
+
   &__title {
     margin: 40px 0 20px 0;
   }
-  &__container {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    column-gap: 1em;
+
+  &__live-container {
+    height: 100%;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__live {
+    width: 175px;
+    height: 175px;
+    border-radius: 50%;
+    border: 1px solid #0df986;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: counterGlow 1.5s infinite alternate;
+
+    span {
+      font-size: 50px;
+      color: $color-accent-green;
+      font-weight: bold;
+    }
   }
 }

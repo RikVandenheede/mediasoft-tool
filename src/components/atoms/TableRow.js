@@ -1,4 +1,4 @@
-export const TableRow = ({ className, row }) => {
+export const TableRow = ({ className, row, key }) => {
   return (
     <div className={className}>
       <div className={`${className}__title`}>
@@ -6,7 +6,7 @@ export const TableRow = ({ className, row }) => {
       </div>
       <div className={`${className}__categories`}>
         {Object.entries(row?.categories[0]).map(([, value]) => (
-          <p>{value}</p>
+          <p key={value}>{value}</p>
         ))}
       </div>
     </div>
