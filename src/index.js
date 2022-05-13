@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 //// PAGES ////
 import { Dashboard } from "./pages/Dashboard";
+import { Audience } from "./pages/Audience";
 
 //// STYLE ////
 import "./style/main.scss";
@@ -14,6 +15,8 @@ root.render(
     <Router>
       <Routes>
         <Route exact path="/" element={<Dashboard />} />
+
+        <Route exact path="/audience" element={<Audience />} />
       </Routes>
     </Router>
   </React.StrictMode>

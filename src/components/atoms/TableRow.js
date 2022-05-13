@@ -1,4 +1,4 @@
-export const TableRow = ({ className, row, key }) => {
+export const TableRow = ({ className, row }) => {
   return (
     <div className={className}>
       <div className={`${className}__title`}>

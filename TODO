@@ -1,3 +1,14 @@
-Favicon
-Tab Title
-``
+// Favicon
+// Tab Title
+// Logo in het blauw
+// Loader animation
+// paginas doorklikken
+// overview card border die circuleert als het active is
+// tabel juist zetten
+// hover op overwiew card, eerst klein stukje dan een helemaal
+// bij divces een sort maken wie welke box krijgt
+// active bij navigation juist zetten(op welke pagina)
+// navigation bug fixen dubble /querry/querry
+// pie chart gender => accent-red & blue
+
+``;

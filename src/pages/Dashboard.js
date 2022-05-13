@@ -58,6 +58,17 @@ export const Dashboard = () => {
         },
       ],
     },
+    {
+      page: "https://testing",
+      categories: [
+        {
+          pageviews: 72,
+          timeOnPage: "00:00:59",
+          exit: "38%",
+          bounceRate: "50%",
+        },
+      ],
+    },
   ];
 
   return (
