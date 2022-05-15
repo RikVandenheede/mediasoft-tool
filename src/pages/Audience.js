@@ -110,7 +110,7 @@ export const Audience = () => {
             </div>
           </div>
           <div className="audience-bottom__city">
-            <h2 className="audience-top__title">City/Country</h2>
+            <h2 className="audience-top__title">Country</h2>
           </div>
           <div className="audience-bottom__language">
             <h2 className="audience-top__title">Language</h2>

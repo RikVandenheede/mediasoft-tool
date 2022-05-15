@@ -7,8 +7,10 @@
 // tabel juist zetten
 // hover op overwiew card, eerst klein stukje dan een helemaal
 // bij divces een sort maken wie welke box krijgt
-// active bij navigation juist zetten(op welke pagina)
-// navigation bug fixen dubble /querry/querry
 // pie chart gender => accent-red & blue
+// Country laten doorklikken naar een andere pagina => city laten zien
+// Mobile ook laten doorklikken naar eigen pagina
+
+// ID in env file zetten
 
 ``;

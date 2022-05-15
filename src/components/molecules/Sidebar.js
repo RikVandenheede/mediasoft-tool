@@ -32,7 +32,7 @@ export const Sidebar = () => {
                 >
                   {menuItem === "/" ? (
                     <NavbarEye className="sidebar-navigation__listitem__svg" />
-                  ) : menuItem === "audience" ? (
+                  ) : menuItem === "/audience" ? (
                     <NavbarUser className="sidebar-navigation__listitem__svg" />
                   ) : (
                     <NavbarSocial className="sidebar-navigation__listitem__svg" />

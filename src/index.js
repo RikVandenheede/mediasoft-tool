@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //// PAGES ////
 import { Dashboard } from "./pages/Dashboard";
 import { Audience } from "./pages/Audience";
+import { Social } from "./pages/Social";
 
 //// STYLE ////
 import "./style/main.scss";
@@ -17,6 +18,8 @@ root.render(
         <Route exact path="/" element={<Dashboard />} />
 
         <Route exact path="/audience" element={<Audience />} />
+
+        <Route exact path="/social" element={<Social />} />
       </Routes>
     </Router>
   </React.StrictMode>

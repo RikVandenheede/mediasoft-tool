@@ -20,6 +20,13 @@
       border-radius: 5px;
       width: 100%;
       height: 100%;
+
+      .graph-top {
+        &__title {
+        }
+        &__select {
+        }
+      }
     }
   }
 }
@@ -38,7 +45,7 @@
     width: auto;
     display: flex;
     justify-content: center;
-    align-items: center;
+    padding: 70px 0 0 0;
   }
 
   &__live {

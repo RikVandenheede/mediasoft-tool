@@ -12,7 +12,7 @@ export const CardItem = () => {
 
       <div className="card-right">
         <p className="card-right__graph"></p>
-        <p className="card-right__percent">16.5%</p>
+        <h4 className="card-right__percent">16.5%</h4>
       </div>
     </div>
   );
