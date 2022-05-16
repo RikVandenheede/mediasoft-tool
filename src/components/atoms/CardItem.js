@@ -1,15 +1,12 @@
 import { useState } from "react";
 import { CardUsers } from "../../helpers/svg";
 
-export const CardItem = ({ name, value }) => {
-  const [active, setActive] = useState(false);
-
-  const onToggle = () => {
-    setActive(!active);
-  };
-
+export const CardItem = ({ name, value, active, setActive }) => {
   return (
-    <div onClick={onToggle} className={active ? "card card--active" : "card"}>
+    <div
+      onClick={() => setActive(name)}
+      className={active === name ? "card card--active" : "card"}
+    >
       <div className="card-left">
         <CardUsers className="card-left__icon" />
         <p className="card-left__name">{name}</p>

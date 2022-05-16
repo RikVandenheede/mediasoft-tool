@@ -142,7 +142,7 @@ export const Dashboard = () => {
   //     .then(formatResults, console.error.bind(console));
   // };
 
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState("7");
   console.log(date);
   const [users, setUsers] = useState("");
   const [pageViews, setPageViews] = useState("");
@@ -163,7 +163,7 @@ export const Dashboard = () => {
 
       report({
         metrics: "ga:pageviews",
-        startDate: `6daysAgo`,
+        startDate: `${date}daysAgo`,
         endDate: "today",
       })
         .then((res) =>
@@ -173,8 +173,9 @@ export const Dashboard = () => {
         )
         .catch((err) => console.log(err));
     }, 1000);
-  }, []);
+  }, [date]);
 
+  const [active, setActive] = useState("Users");
   return (
     <>
       {!isSignedIn ? (
@@ -186,8 +187,18 @@ export const Dashboard = () => {
             <h2 className="dashboard-overview__title">Overview</h2>
             <section className="dashboard-overview-container">
               <div className="dashboard-overview-container__cards">
-                <CardItem name="Users" value={users} />
-                <CardItem name="Pageviews" value={pageViews} />
+                <CardItem
+                  name="Users"
+                  value={users}
+                  active={active}
+                  setActive={setActive}
+                />
+                <CardItem
+                  name="Pageviews"
+                  value={pageViews}
+                  active={active}
+                  setActive={setActive}
+                />
                 <CardItem />
                 <CardItem />
                 <CardItem />
