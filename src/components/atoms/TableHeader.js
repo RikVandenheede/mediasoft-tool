@@ -3,6 +3,7 @@ export const TableHeader = ({
   title,
   categories,
   selectOptions,
+  setDate,
 }) => {
   return (
     <div className={className}>
@@ -11,9 +12,9 @@ export const TableHeader = ({
       </div>
 
       {selectOptions ? (
-        <select>
+        <select onChange={(e) => setDate(e.target.value.split(" ")[0])}>
           {selectOptions?.map((option) => (
-            <option>{option}</option>
+            <option value={option.value}>{option}</option>
           ))}
         </select>
       ) : (

@@ -2,7 +2,6 @@ import { TableHeader } from "../atoms/TableHeader";
 import { TableRow } from "../atoms/TableRow";
 
 export const Table = ({ title, categories, data }) => {
-  console.log(data);
   return (
     <div className="table">
       <TableHeader

@@ -13,4 +13,12 @@
 
 // ID in env file zetten
 
+//// QUESTIONS ////
+// hoe pas ik mijn tabel aan met het delect field? (state doortgeven parent <=> child)
+// waarom past de voert de useEffect zich niet nog eens uit nadat de state is geupdate
+// deze 6 kaartjes, maak ik 6 aparte calls?
+// tabel => hoe zorg ik ervoor dat mijn tableRow dezelfde verdeling(width) heft als mijn tableRow?
+
+////////
+// Percent en kleine chart weglaten
 ``;

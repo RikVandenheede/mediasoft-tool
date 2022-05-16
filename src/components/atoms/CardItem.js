@@ -1,13 +1,19 @@
-// This is a dummy icon (remove later)
+import { useState } from "react";
 import { CardUsers } from "../../helpers/svg";
 
-export const CardItem = () => {
+export const CardItem = ({ name, value }) => {
+  const [active, setActive] = useState(false);
+
+  const onToggle = () => {
+    setActive(!active);
+  };
+
   return (
-    <div className="card">
+    <div onClick={onToggle} className={active ? "card card--active" : "card"}>
       <div className="card-left">
         <CardUsers className="card-left__icon" />
-        <p className="card-left__name">New Users</p>
-        <h3 className="card-left__number">162</h3>
+        <p className="card-left__name">{name}</p>
+        <h3 className="card-left__number">{value}</h3>
       </div>
 
       <div className="card-right">
