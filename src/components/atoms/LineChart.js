@@ -78,7 +78,7 @@ export const LineChart = () => {
       {
         label: "Second dataset",
         data: [33, 25, 35, 51, 54, 76, 54],
-        fill: false,
+        fill: true,
         borderColor: "#742774",
       },
     ],

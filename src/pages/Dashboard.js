@@ -143,12 +143,14 @@ export const Dashboard = () => {
   // };
 
   const [date, setDate] = useState("7");
-  console.log(date);
+
   const [users, setUsers] = useState("");
   const [pageViews, setPageViews] = useState("");
+  const [newUsers, setNewUsers] = useState("");
 
   useEffect(() => {
     setTimeout(() => {
+      //// USERS ////
       report({
         metrics: "ga:users",
         startDate: `${date}daysAgo`,
@@ -161,6 +163,20 @@ export const Dashboard = () => {
         )
         .catch((err) => console.log(err));
 
+      //// New Users ////
+      report({
+        metrics: "ga:newusers",
+        startDate: `${date}daysAgo`,
+        endDate: "today",
+      })
+        .then((res) =>
+          setNewUsers(
+            res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
+          )
+        )
+        .catch((err) => console.log(err));
+
+      //// Pageviews ////
       report({
         metrics: "ga:pageviews",
         startDate: `${date}daysAgo`,
@@ -171,6 +187,15 @@ export const Dashboard = () => {
             res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
           )
         )
+        .catch((err) => console.log(err));
+
+      //// Pageviews ////
+      report({
+        metrics: "ga:avgSessionDuration",
+        startDate: `${date}daysAgo`,
+        endDate: "today",
+      })
+        .then((res) => console.log(res))
         .catch((err) => console.log(err));
     }, 1000);
   }, [date]);
@@ -199,7 +224,12 @@ export const Dashboard = () => {
                   active={active}
                   setActive={setActive}
                 />
-                <CardItem />
+                <CardItem
+                  name="New Users"
+                  value={newUsers}
+                  active={active}
+                  setActive={setActive}
+                />
                 <CardItem />
                 <CardItem />
                 <CardItem />
@@ -207,8 +237,8 @@ export const Dashboard = () => {
               <div className="dashboard-overview-container__graph">
                 <TableHeader
                   className="table-header"
-                  title="Test"
-                  selectOptions={["7 days", "30 days", "90 days", "180 days"]}
+                  title={active}
+                  selectOptions={["6 days", "30 days", "90 days", "180 days"]}
                   setDate={setDate}
                 />
                 <LineChart />

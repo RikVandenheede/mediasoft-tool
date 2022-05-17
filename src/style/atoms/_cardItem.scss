@@ -20,9 +20,12 @@
     h3 {
       color: $color-white;
     }
+    background-color: $color-accent-blue;
   }
 
   &:hover {
+    cursor: pointer;
+
     &::before {
       content: "";
       position: absolute;
