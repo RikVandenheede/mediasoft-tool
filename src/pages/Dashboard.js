@@ -9,6 +9,7 @@ import { Table } from "../components/molecules/Table";
 
 import { renderButton, checkSignedIn } from "../helpers/utils";
 import { report } from "../helpers/report";
+import { timeFormatter } from "../helpers/timeFormatter";
 
 export const Dashboard = () => {
   //LOGIN
@@ -105,48 +106,13 @@ export const Dashboard = () => {
     },
   ];
 
-  // const [overview, setOverview] = useState([]);
-
-  // const getOverview = () => {
-  //   const formatResults = (response) => {
-  //     setOverview({
-  //       users:
-  //         response?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0],
-  //     });
-  //   };
-
-  //   window.gapi.client
-  //     .request({
-  //       path: "/v4/reports:batchGet",
-  //       root: "https://analyticsreporting.googleapis.com/",
-  //       method: "POST",
-  //       body: {
-  //         reportRequests: [
-  //           {
-  //             viewId: "4206720", //enter your view ID here
-  //             dateRanges: [
-  //               {
-  //                 startDate: "6daysAgo",
-  //                 endDate: "today",
-  //               },
-  //             ],
-  //             metrics: [
-  //               {
-  //                 expression: "ga:users",
-  //               },
-  //             ],
-  //           },
-  //         ],
-  //       },
-  //     })
-  //     .then(formatResults, console.error.bind(console));
-  // };
-
   const [date, setDate] = useState("7");
 
   const [users, setUsers] = useState("");
   const [pageViews, setPageViews] = useState("");
   const [newUsers, setNewUsers] = useState("");
+  const [time, setTime] = useState("");
+  const [sessions, setSessions] = useState("");
 
   useEffect(() => {
     setTimeout(() => {
@@ -189,13 +155,34 @@ export const Dashboard = () => {
         )
         .catch((err) => console.log(err));
 
-      //// Pageviews ////
+      //// Time ////
       report({
         metrics: "ga:avgSessionDuration",
         startDate: `${date}daysAgo`,
         endDate: "today",
       })
-        .then((res) => console.log(res))
+        .then((res) =>
+          setTime(
+            timeFormatter(
+              Math.round(
+                res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
+              )
+            )
+          )
+        )
+        .catch((err) => console.log(err));
+
+      //// Sessions ////
+      report({
+        metrics: "ga:sessions",
+        startDate: `${date}daysAgo`,
+        endDate: "today",
+      })
+        .then((res) =>
+          setSessions(
+            res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
+          )
+        )
         .catch((err) => console.log(err));
     }, 1000);
   }, [date]);
@@ -219,26 +206,36 @@ export const Dashboard = () => {
                   setActive={setActive}
                 />
                 <CardItem
+                  name="New Users"
+                  value={newUsers}
+                  active={active}
+                  setActive={setActive}
+                />
+                <CardItem
                   name="Pageviews"
                   value={pageViews}
                   active={active}
                   setActive={setActive}
                 />
                 <CardItem
-                  name="New Users"
-                  value={newUsers}
+                  name="Session duration"
+                  value={time}
                   active={active}
                   setActive={setActive}
                 />
-                <CardItem />
-                <CardItem />
+                <CardItem
+                  name="Sessions"
+                  value={sessions}
+                  active={active}
+                  setActive={setActive}
+                />
                 <CardItem />
               </div>
               <div className="dashboard-overview-container__graph">
                 <TableHeader
                   className="table-header"
                   title={active}
-                  selectOptions={["6 days", "30 days", "90 days", "180 days"]}
+                  selectOptions={["7 days", "30 days", "90 days", "180 days"]}
                   setDate={setDate}
                 />
                 <LineChart />

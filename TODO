@@ -25,4 +25,6 @@
 //display as table
 
 //Bij opstart Calls maken om zo percenten te berekenen of op hetzelfde moment een call doen met number x2 om zo het percent TOV de week ervoor te berenekenen
+
+//Table maken met useRef
 ``;
