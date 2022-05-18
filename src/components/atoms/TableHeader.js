@@ -13,14 +13,16 @@ export const TableHeader = ({
 
       {selectOptions ? (
         <select onChange={(e) => setDate(e.target.value.split(" ")[0])}>
-          {selectOptions?.map((option) => (
-            <option value={option.value}>{option}</option>
+          {selectOptions?.map((option, i) => (
+            <option key={i} value={option.value}>
+              {option}
+            </option>
           ))}
         </select>
       ) : (
         <div className={`${className}__categories`}>
-          {categories.map((categorie) => (
-            <p key={categorie}>{categorie}</p>
+          {categories.map((categorie, i) => (
+            <p key={i}>{categorie}</p>
           ))}
         </div>
       )}

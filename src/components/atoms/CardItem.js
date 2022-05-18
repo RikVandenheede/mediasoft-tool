@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { CardUsers } from "../../helpers/svg";
 
 export const CardItem = ({ name, value, active, setActive }) => {

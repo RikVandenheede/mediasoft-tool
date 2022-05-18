@@ -10,8 +10,8 @@ export const Table = ({ title, categories, data }) => {
         categories={categories}
       />
       <div className="table-body">
-        {data.map((row) => (
-          <TableRow className="table-body__row" row={row} />
+        {data.map((row, i) => (
+          <TableRow key={i} className="table-body__row" row={row} />
         ))}
       </div>
     </div>

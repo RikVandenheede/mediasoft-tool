@@ -108,84 +108,100 @@ export const Dashboard = () => {
 
   const [date, setDate] = useState("7");
 
-  const [users, setUsers] = useState("");
-  const [pageViews, setPageViews] = useState("");
-  const [newUsers, setNewUsers] = useState("");
-  const [time, setTime] = useState("");
-  const [sessions, setSessions] = useState("");
+  const [users, setUsers] = useState(0);
+  const [pageViews, setPageViews] = useState(0);
+  const [newUsers, setNewUsers] = useState(0);
+  const [time, setTime] = useState(0);
+  const [sessions, setSessions] = useState(0);
+  const [bouncerate, setBouncerate] = useState(0);
 
-  useEffect(() => {
-    setTimeout(() => {
-      //// USERS ////
-      report({
-        metrics: "ga:users",
-        startDate: `${date}daysAgo`,
-        endDate: "today",
-      })
-        .then((res) =>
-          setUsers(
-            res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
-          )
-        )
-        .catch((err) => console.log(err));
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     //// USERS ////
+  //     report({
+  //       metrics: "ga:users",
+  //       startDate: `${date}daysAgo`,
+  //       endDate: "today",
+  //     })
+  //       .then((res) =>
+  //         setUsers(
+  //           res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
+  //         )
+  //       )
+  //       .catch((err) => console.log(err));
 
-      //// New Users ////
-      report({
-        metrics: "ga:newusers",
-        startDate: `${date}daysAgo`,
-        endDate: "today",
-      })
-        .then((res) =>
-          setNewUsers(
-            res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
-          )
-        )
-        .catch((err) => console.log(err));
+  //     //// New Users ////
+  //     report({
+  //       metrics: "ga:newusers",
+  //       startDate: `${date}daysAgo`,
+  //       endDate: "today",
+  //     })
+  //       .then((res) =>
+  //         setNewUsers(
+  //           res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
+  //         )
+  //       )
+  //       .catch((err) => console.log(err));
 
-      //// Pageviews ////
-      report({
-        metrics: "ga:pageviews",
-        startDate: `${date}daysAgo`,
-        endDate: "today",
-      })
-        .then((res) =>
-          setPageViews(
-            res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
-          )
-        )
-        .catch((err) => console.log(err));
+  //     //// Pageviews ////
+  //     report({
+  //       metrics: "ga:pageviews",
+  //       startDate: `${date}daysAgo`,
+  //       endDate: "today",
+  //     })
+  //       .then((res) =>
+  //         setPageViews(
+  //           res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
+  //         )
+  //       )
+  //       .catch((err) => console.log(err));
 
-      //// Time ////
-      report({
-        metrics: "ga:avgSessionDuration",
-        startDate: `${date}daysAgo`,
-        endDate: "today",
-      })
-        .then((res) =>
-          setTime(
-            timeFormatter(
-              Math.round(
-                res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
-              )
-            )
-          )
-        )
-        .catch((err) => console.log(err));
+  //     //// Averag e session duration ////
+  //     report({
+  //       metrics: "ga:avgSessionDuration",
+  //       startDate: `${date}daysAgo`,
+  //       endDate: "today",
+  //     })
+  //       .then((res) =>
+  //         setTime(
+  //           timeFormatter(
+  //             Math.round(
+  //               res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
+  //             )
+  //           )
+  //         )
+  //       )
+  //       .catch((err) => console.log(err));
 
-      //// Sessions ////
-      report({
-        metrics: "ga:sessions",
-        startDate: `${date}daysAgo`,
-        endDate: "today",
-      })
-        .then((res) =>
-          setSessions(
-            res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
-          )
-        )
-        .catch((err) => console.log(err));
-    }, 1000);
-  }, [date]);
+  //     //// Sessions ////
+  //     report({
+  //       metrics: "ga:sessions",
+  //       startDate: `${date}daysAgo`,
+  //       endDate: "today",
+  //     })
+  //       .then((res) =>
+  //         setSessions(
+  //           res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
+  //         )
+  //       )
+  //       .catch((err) => console.log(err));
+
+  //     //// Bounce rate ////
+  //     report({
+  //       metrics: "ga:bounceRate",
+  //       startDate: `${date}daysAgo`,
+  //       endDate: "today",
+  //     })
+  //       .then((res) =>
+  //         setBouncerate(
+  //           `${Math.round(
+  //             res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
+  //           )}%`
+  //         )
+  //       )
+  //       .catch((err) => console.log(err));
+  //   }, 1000);
+  // }, [date]);
 
   const [active, setActive] = useState("Users");
   return (
@@ -194,7 +210,6 @@ export const Dashboard = () => {
         <div id="signin-button"></div>
       ) : (
         <Layout className="dashboard" title="Page Insights">
-          {console.log(users)}
           <section className="dashboard-overview">
             <h2 className="dashboard-overview__title">Overview</h2>
             <section className="dashboard-overview-container">
@@ -212,24 +227,29 @@ export const Dashboard = () => {
                   setActive={setActive}
                 />
                 <CardItem
+                  name="Sessions"
+                  value={sessions}
+                  active={active}
+                  setActive={setActive}
+                />
+                <CardItem
+                  name="Avg Session duration"
+                  value={time}
+                  active={active}
+                  setActive={setActive}
+                />
+                <CardItem
                   name="Pageviews"
                   value={pageViews}
                   active={active}
                   setActive={setActive}
                 />
                 <CardItem
-                  name="Session duration"
-                  value={time}
+                  name="Bounce rate"
+                  value={bouncerate}
                   active={active}
                   setActive={setActive}
                 />
-                <CardItem
-                  name="Sessions"
-                  value={sessions}
-                  active={active}
-                  setActive={setActive}
-                />
-                <CardItem />
               </div>
               <div className="dashboard-overview-container__graph">
                 <TableHeader
