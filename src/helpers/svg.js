@@ -149,17 +149,17 @@ export const Phone = ({ className }) => {
         ry="48"
         fill="none"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="32"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="32"
       />
       <path
         d="M176 16h24a8 8 0 018 8h0a16 16 0 0016 16h64a16 16 0 0016-16h0a8 8 0 018-8h24"
         fill="none"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="32"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="32"
       />
     </svg>
   );
@@ -182,9 +182,9 @@ export const Tablet = ({ className }) => {
         ry="48"
         fill="none"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="32"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="32"
       />
     </svg>
   );
@@ -207,14 +207,14 @@ export const Laptop = ({ className }) => {
         ry="32.14"
         fill="none"
         stroke="currentColor"
-        stroke-linejoin="round"
-        stroke-width="32"
+        strokeLinejoin="round"
+        strokeWidth="32"
       />
       <path
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-miterlimit="10"
-        stroke-width="32"
+        strokeLinecap="round"
+        strokeMiterlimit="10"
+        strokeWidth="32"
         d="M16 416h480"
       />
     </svg>

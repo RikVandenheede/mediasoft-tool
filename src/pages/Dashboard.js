@@ -118,84 +118,83 @@ export const Dashboard = () => {
   useEffect(() => {
     setTimeout(() => {
       //// USERS ////
-      report({
-        metrics: "ga:users",
-        startDate: `${date}daysAgo`,
-        endDate: "today",
-      })
-        .then((res) =>
-          setUsers(
-            res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
-          )
-        )
-        .catch((err) => console.log(err));
-
-      //// New Users ////
-      report({
-        metrics: "ga:newusers",
-        startDate: `${date}daysAgo`,
-        endDate: "today",
-      })
-        .then((res) =>
-          setNewUsers(
-            res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
-          )
-        )
-        .catch((err) => console.log(err));
-
-      //// Pageviews ////
-      report({
-        metrics: "ga:pageviews",
-        startDate: `${date}daysAgo`,
-        endDate: "today",
-      })
-        .then((res) =>
-          setPageViews(
-            res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
-          )
-        )
-        .catch((err) => console.log(err));
-
-      //// Averag e session duration ////
-      report({
-        metrics: "ga:avgSessionDuration",
-        startDate: `${date}daysAgo`,
-        endDate: "today",
-      })
-        .then((res) =>
-          setTime(
-            timeFormatter(
-              Math.round(
-                res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
-              )
-            )
-          )
-        )
-        .catch((err) => console.log(err));
-
-      //// Sessions ////
-      report({
-        metrics: "ga:sessions",
-        startDate: `${date}daysAgo`,
-        endDate: "today",
-      })
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
-
-      //// Bounce rate ////
-      report({
-        metrics: "ga:bounceRate",
-        startDate: `${date}daysAgo`,
-        endDate: "today",
-      })
-        .then((res) =>
-          setBouncerate(
-            `${Math.round(
-              res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
-            )}%`
-          )
-        )
-        .catch((err) => console.log(err));
+      // report({
+      //   metrics: "ga:users",
+      //   startDate: `${date}daysAgo`,
+      //   endDate: "today",
+      // })
+      //   .then((res) =>
+      //     setUsers(
+      //       res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
+      //     )
+      //   )
+      //   .catch((err) => console.log(err));
+      // //// New Users ////
+      // report({
+      //   metrics: "ga:newusers",
+      //   startDate: `${date}daysAgo`,
+      //   endDate: "today",
+      // })
+      //   .then((res) =>
+      //     setNewUsers(
+      //       res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
+      //     )
+      //   )
+      //   .catch((err) => console.log(err));
+      // //// Pageviews ////
+      // report({
+      //   metrics: "ga:pageviews",
+      //   startDate: `${date}daysAgo`,
+      //   endDate: "today",
+      // })
+      //   .then((res) =>
+      //     setPageViews(
+      //       res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
+      //     )
+      //   )
+      //   .catch((err) => console.log(err));
+      // //// Averag e session duration ////
+      // report({
+      //   metrics: "ga:avgSessionDuration",
+      //   startDate: `${date}daysAgo`,
+      //   endDate: "today",
+      // })
+      //   .then((res) =>
+      //     setTime(
+      //       timeFormatter(
+      //         Math.round(
+      //           res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
+      //         )
+      //       )
+      //     )
+      //   )
+      //   .catch((err) => console.log(err));
+      // //// Sessions ////
+      // report({
+      //   metrics: "ga:sessions",
+      //   startDate: `${date}daysAgo`,
+      //   endDate: "today",
+      // })
+      //   .then((res) =>
+      //     setSessions(
+      //       res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
+      //     )
+      //   )
+      //   .catch((err) => console.log(err));
+      // //// Bounce rate ////
+      // report({
+      //   metrics: "ga:bounceRate",
+      //   startDate: `${date}daysAgo`,
+      //   endDate: "today",
+      // })
+      //   .then((res) =>
+      //     setBouncerate(
+      //       `${Math.round(
+      //         res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
+      //       )}%`
+      //     )
+      //   )
+      //   .catch((err) => console.log(err));
     }, 1000);
   }, [date]);
 

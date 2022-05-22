@@ -23,6 +23,7 @@
 // Percent en kleine chart weglaten
 // Volgorde kaarjes dashboard => users, new users. Sessions - session duration
 //display as table
+// Percent bij device = getal delen door totaalgetal x 100
 
 //Bij opstart Calls maken om zo percenten te berekenen of op hetzelfde moment een call doen met number x2 om zo het percent TOV de week ervoor te berenekenen
 
