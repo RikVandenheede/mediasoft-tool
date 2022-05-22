@@ -68,25 +68,39 @@ export const LineChart = () => {
   const data = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
     datasets: [
-      {
-        label: "First dataset",
-        data: [33, 53, 85, 41, 44, 65, 78],
-        fill: true,
-        backgroundColor: "rgba(75,192,192,0.2)",
-        borderColor: "rgba(75,192,192,1)",
-      },
+      // {
+      //   label: "First dataset",
+      //   data: [33, 53, 85, 41, 44, 65, 78],
+      //   backgroundColor: "rgba(75,192,192,0.2)",
+      //   borderColor: "rgba(75,192,192,1)",
+      //   cubicInterpolationMode: "monotone",
+      //   fill: true,
+      // },
       {
         label: "Second dataset",
         data: [33, 25, 35, 51, 54, 76, 54],
+        backgroundColor: "#fff",
+        borderColor: "#000",
+        cubicInterpolationMode: "monotone",
         fill: true,
-        borderColor: "#742774",
       },
     ],
   };
 
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {},
+      title: {
+        display: false,
+        text: "Badpages",
+      },
+    },
+  };
+
   return (
     <div>
-      <Line height="100%" data={data} />
+      <Line height="100%" options={options} data={data} />
     </div>
   );
 };
