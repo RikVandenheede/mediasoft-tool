@@ -92,6 +92,7 @@ export const LineChart = () => {
     plugins: {
       legend: {},
       title: {
+        
         display: false,
         text: "Badpages",
       },

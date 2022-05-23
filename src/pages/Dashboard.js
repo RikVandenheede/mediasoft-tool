@@ -10,34 +10,10 @@ import { Table } from "../components/molecules/Table";
 import { renderButton, checkSignedIn } from "../helpers/utils";
 import { report } from "../helpers/report";
 import { timeFormatter } from "../helpers/timeFormatter";
+import { useLoggedIn } from "../helpers/useLoggedIn";
 
 export const Dashboard = () => {
   //LOGIN
-  const [isSignedIn, setIsSignedIn] = useState(false);
-
-  const updateSignin = (signedIn) => {
-    //(3)
-    setIsSignedIn(signedIn);
-    if (!signedIn) {
-      renderButton();
-    }
-  };
-
-  const init = () => {
-    //(2)
-    checkSignedIn()
-      .then((signedIn) => {
-        updateSignin(signedIn);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  useEffect(() => {
-    window.gapi.load("auth2", init); //(1)
-  });
-  //////////////////////////////////////////////////////////////
 
   const tableHeaderTtile = "Pages";
   const tableHeaderCategories = [
@@ -50,63 +26,13 @@ export const Dashboard = () => {
   // format data
   const data = [
     {
-      page: "https://testing",
-      categories: [
-        {
-          pageviews: 69,
-          timeOnPage: "00:00:59",
-          exit: "38%",
-          bounceRate: "50%",
-        },
-      ],
-    },
-    {
-      page: "https://testing",
-      categories: [
-        {
-          pageviews: 70,
-          timeOnPage: "00:00:59",
-          exit: "38%",
-          bounceRate: "50%",
-        },
-      ],
-    },
-    {
-      page: "https://testing",
-      categories: [
-        {
-          pageviews: 71,
-          timeOnPage: "00:00:59",
-          exit: "38%",
-          bounceRate: "50%",
-        },
-      ],
-    },
-    {
-      page: "https://testing",
-      categories: [
-        {
-          pageviews: 72,
-          timeOnPage: "00:00:59",
-          exit: "38%",
-          bounceRate: "50%",
-        },
-      ],
-    },
-    {
-      page: "https://testing",
-      categories: [
-        {
-          pageviews: 72,
-          timeOnPage: "00:00:59",
-          exit: "38%",
-          bounceRate: "50%",
-        },
-      ],
+      name: "https://testing",
+      values: [69, "00:00:59", "38%", "50%"],
     },
   ];
 
   const [date, setDate] = useState("7");
+  const isSignedIn = useLoggedIn();
 
   const [users, setUsers] = useState(0);
   const [pageViews, setPageViews] = useState(0);
@@ -202,7 +128,11 @@ export const Dashboard = () => {
   return (
     <>
       {!isSignedIn ? (
-        <div id="signin-button"></div>
+        <>
+          <div id="signin-button"></div>
+
+          {renderButton()}
+        </>
       ) : (
         <Layout className="dashboard" title="Page Insights">
           <section className="dashboard-overview">

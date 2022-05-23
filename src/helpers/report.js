@@ -1,5 +1,7 @@
 export const report = ({ dimensions, metrics, startDate, endDate }) => {
   console.log(dimensions);
+
+  const metricOrDimension = (metric, dimension) => {};
   return window.gapi.client.request({
     path: "/v4/reports:batchGet",
     root: "https://analyticsreporting.googleapis.com/",
