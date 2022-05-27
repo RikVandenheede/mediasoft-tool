@@ -8,6 +8,7 @@ import { report } from "../helpers/report";
 import { Phone, Tablet, Laptop } from "../helpers/svg";
 import { useLoggedIn } from "../helpers/useLoggedIn";
 import { renderButton, checkSignedIn } from "../helpers/utils";
+import { percetageFormatter } from "../helpers/percentageFormatter";
 
 export const Audience = () => {
   const tableHeaderCategories = [
@@ -90,44 +91,68 @@ export const Audience = () => {
 
   const [devices, setDevices] = useState([]);
   const [countries, setCountries] = useState([]);
+  const [languages, setLanguages] = useState([]);
   const isSignedIn = useLoggedIn();
 
   useEffect(() => {
     setTimeout(() => {
-      // USERS ////
-      report({
-        dimensions: "ga:deviceCategory",
-        startDate: `7daysAgo`,
-        endDate: "today",
-      })
-        .then((res) =>
-          setDevices(
-            res?.result?.reports[0].data?.rows.map((device) => {
-              return {
-                name: device.dimensions[0],
-                value: device.metrics[0].values[0],
-              };
-            })
-          )
-        )
-        .catch((err) => console.log(err));
-
-      report({
-        dimensions: "ga:country",
-        startDate: `7daysAgo`,
-        endDate: "today",
-      })
-        .then((res) =>
-          setCountries(
-            res?.result?.reports[0].data?.rows.map((country) => {
-              return {
-                name: country.dimensions[0],
-                values: [country.metrics[0].values[0], "7%"],
-              };
-            })
-          )
-        )
-        .catch((err) => console.log(err));
+      // // Devices ////
+      // report({
+      //   dimensions: "ga:deviceCategory",
+      //   startDate: `7daysAgo`,
+      //   endDate: "today",
+      // })
+      //   .then((res) =>
+      //     setDevices(
+      //       res?.result?.reports[0].data?.rows.map((device) => {
+      //         return {
+      //           name: device.dimensions[0],
+      //           value: device.metrics[0].values[0],
+      //         };
+      //       })
+      //     )
+      //   )
+      //   .catch((err) => console.log(err));
+      // // Country ////
+      // report({
+      //   dimensions: "ga:country",
+      //   startDate: `7daysAgo`,
+      //   endDate: "today",
+      // })
+      //   .then((res) =>
+      //     setCountries(
+      //       res?.result?.reports[0].data?.rows.map((country) => {
+      //         return {
+      //           name: country.dimensions[0],
+      //           values: [
+      //             country.metrics[0].values[0],
+      //             percetageFormatter(country.metrics[0].values[0], res),
+      //           ],
+      //         };
+      //       })
+      //     )
+      //   )
+      //   .catch((err) => console.log(err));
+      // // Language ////
+      // report({
+      //   dimensions: "ga:language",
+      //   startDate: `7daysAgo`,
+      //   endDate: "today",
+      // })
+      //   .then((res) =>
+      //     setLanguages(
+      //       res?.result?.reports[0].data?.rows.map((language) => {
+      //         return {
+      //           name: language.dimensions[0],
+      //           values: [
+      //             language.metrics[0].values[0],
+      //             percetageFormatter(language.metrics[0].values[0], res),
+      //           ],
+      //         };
+      //       })
+      //     )
+      //   )
+      //   .catch((err) => console.log(err));
     }, 1000);
   }, []);
 
@@ -136,7 +161,6 @@ export const Audience = () => {
       {!isSignedIn ? (
         <>
           <div id="signin-button"></div>
-          {renderButton()}
         </>
       ) : (
         <Layout className="audience" title="Audience">
@@ -156,8 +180,6 @@ export const Audience = () => {
           <section className="audience-bottom">
             <div className="audience-bottom__devices">
               <h2 className="audience-top__title">Devices</h2>
-              {console.log(devices)}
-
               {devices.length === 0 ? (
                 <DivicesLoader />
               ) : (
@@ -189,9 +211,7 @@ export const Audience = () => {
               )}
             </div>
             <div className="audience-bottom__city">
-              <div className="test"></div>
               <h2 className="audience-top__title">Country</h2>
-              {console.log(countries)}
               <Table
                 title="country"
                 categories={["sessions", "% sessions"]}
@@ -199,7 +219,12 @@ export const Audience = () => {
               />
             </div>
             <div className="audience-bottom__language">
-              <h2 className="audience-top__title"></h2>
+              <h2 className="audience-top__title">Languages</h2>
+              <Table
+                title="Language"
+                categories={["sessions", "% sessions"]}
+                data={languages.sort((a, b) => b.values[0] - a.values[0])}
+              />
             </div>
           </section>
         </Layout>

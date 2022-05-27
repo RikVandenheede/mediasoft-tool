@@ -43,7 +43,15 @@ export const Dashboard = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      //// USERS ////
+      report({
+        dimensions: "ga:pagePath",
+        startDate: `${date}daysAgo`,
+        endDate: "today",
+      })
+        .then((res) => console.log(res))
+        .catch((e) => console.log(e));
+
+      // // USERS ////
       // report({
       //   metrics: "ga:users",
       //   startDate: `${date}daysAgo`,
@@ -55,6 +63,7 @@ export const Dashboard = () => {
       //     )
       //   )
       //   .catch((err) => console.log(err));
+
       // //// New Users ////
       // report({
       //   metrics: "ga:newusers",
@@ -67,6 +76,7 @@ export const Dashboard = () => {
       //     )
       //   )
       //   .catch((err) => console.log(err));
+
       // //// Pageviews ////
       // report({
       //   metrics: "ga:pageviews",
@@ -122,7 +132,7 @@ export const Dashboard = () => {
       //   )
       //   .catch((err) => console.log(err));
     }, 1000);
-  }, [date]);
+  }, [date, isSignedIn]);
 
   const [active, setActive] = useState("Users");
   return (
@@ -130,8 +140,6 @@ export const Dashboard = () => {
       {!isSignedIn ? (
         <>
           <div id="signin-button"></div>
-
-          {renderButton()}
         </>
       ) : (
         <Layout className="dashboard" title="Page Insights">

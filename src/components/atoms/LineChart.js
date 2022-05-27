@@ -8,6 +8,7 @@ import {
   Legend,
   PointElement,
   LineElement,
+  Filler,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
@@ -18,6 +19,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
+  Filler,
   PointElement,
   LineElement
 );
@@ -68,19 +70,11 @@ export const LineChart = () => {
   const data = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
     datasets: [
-      // {
-      //   label: "First dataset",
-      //   data: [33, 53, 85, 41, 44, 65, 78],
-      //   backgroundColor: "rgba(75,192,192,0.2)",
-      //   borderColor: "rgba(75,192,192,1)",
-      //   cubicInterpolationMode: "monotone",
-      //   fill: true,
-      // },
       {
         label: "Second dataset",
         data: [33, 25, 35, 51, 54, 76, 54],
-        backgroundColor: "#fff",
-        borderColor: "#000",
+        backgroundColor: "#7e70d64d",
+        borderColor: "#6c5dd3",
         cubicInterpolationMode: "monotone",
         fill: true,
       },
@@ -92,7 +86,6 @@ export const LineChart = () => {
     plugins: {
       legend: {},
       title: {
-        
         display: false,
         text: "Badpages",
       },

@@ -1,6 +1,7 @@
 // Favicon
 // Tab Title
 // Logo in het blauw
+// custom Scrollbar, bij tables en default browser
 // Loader animation
 // paginas doorklikken
 // overview card border die circuleert als het active is
@@ -31,4 +32,9 @@
 //Table maken met useRef
 
 // chaching bij request
+
+// sommige tables miss soreteren van hoog naar laag
+
+//Mobile => percenten?
+
 ``;
