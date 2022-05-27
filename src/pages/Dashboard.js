@@ -6,16 +6,69 @@ import { TableHeader } from "../components/atoms/TableHeader";
 
 import { Layout } from "../components/molecules/Layout";
 import { Table } from "../components/molecules/Table";
+import { OverviewGridLoader } from "../helpers/loaders";
 
-import { renderButton, checkSignedIn } from "../helpers/utils";
 import { report } from "../helpers/report";
 import { timeFormatter } from "../helpers/timeFormatter";
 import { useLoggedIn } from "../helpers/useLoggedIn";
 
 export const Dashboard = () => {
-  //LOGIN
+  const [date, setDate] = useState("7");
+  const isSignedIn = useLoggedIn();
+  const [pages, setPages] = useState([]);
+  const [gridMetrics, setGridMetrics] = useState([]);
 
-  const tableHeaderTtile = "Pages";
+  useEffect(() => {
+    setTimeout(() => {
+      //// PAGES; ////
+      // report({
+      //   dimensions: ["ga:pagePath"],
+      //   metrics: [
+      //     "ga:pageViews",
+      //     "ga:avgTimeOnPage",
+      //     "ga:exitRate",
+      //     "ga:bounceRate",
+      //   ],
+      //   startDate: `${date}daysAgo`,
+      //   endDate: "today",
+      //   order: { fieldName: "ga:pageViews", sortOrder: "DESCENDING" },
+      // })
+      //   .then((res) =>
+      //     setPages(
+      //       res?.result?.reports[0]?.data?.rows.map((page) => {
+      //         return {
+      //           name: page.dimensions[0],
+      //           values: page.metrics[0].values.map((metric, i) => {
+      //             if (i === 0) return metric;
+      //             else if (i === 1) return timeFormatter(Math.round(metric));
+      //             else return `${Math.round(metric)}%`;
+      //           }),
+      //         };
+      //       })
+      //     )
+      //   )
+      //   .catch((e) => console.log(e));
+      report({
+        metrics: [
+          "ga:users",
+          "ga:newUsers",
+          "ga:avgSessionDuration",
+          "ga:sessions",
+          "ga:pageViews",
+          "ga:bounceRate",
+        ],
+        startDate: `${date}daysAgo`,
+        endDate: "today",
+      })
+        .then((res) =>
+          gridMetricsFormatter(
+            res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values
+          )
+        )
+        .catch((e) => console.log(e));
+    }, 1000);
+  }, [date, isSignedIn]);
+
   const tableHeaderCategories = [
     "Pageviews",
     "avg time on page",
@@ -23,120 +76,35 @@ export const Dashboard = () => {
     "Bounce rate",
   ];
 
-  // format data
-  const data = [
-    {
-      name: "https://testing",
-      values: [69, "00:00:59", "38%", "50%"],
-    },
-  ];
+  const gridMetricsFormatter = (metrics) => {
+    const titles = [
+      "Users",
+      "New Users",
+      "Avg Session Duration",
+      "Sessions",
+      "Pageviews",
+      "Bounce Rate",
+    ];
 
-  const [date, setDate] = useState("7");
-  const isSignedIn = useLoggedIn();
-
-  const [users, setUsers] = useState(0);
-  const [pageViews, setPageViews] = useState(0);
-  const [newUsers, setNewUsers] = useState(0);
-  const [time, setTime] = useState(0);
-  const [sessions, setSessions] = useState(0);
-  const [bouncerate, setBouncerate] = useState(0);
-
-  useEffect(() => {
-    setTimeout(() => {
-      report({
-        dimensions: "ga:pagePath",
-        startDate: `${date}daysAgo`,
-        endDate: "today",
+    setGridMetrics(
+      metrics.map((metric, i) => {
+        return {
+          name: titles[i],
+          value:
+            i === 2 // Time
+              ? timeFormatter(Math.round(metric))
+              : i === 5 // Percent
+              ? `${Math.round(metric)}%`
+              : metric,
+        };
       })
-        .then((res) => console.log(res))
-        .catch((e) => console.log(e));
-
-      // // USERS ////
-      // report({
-      //   metrics: "ga:users",
-      //   startDate: `${date}daysAgo`,
-      //   endDate: "today",
-      // })
-      //   .then((res) =>
-      //     setUsers(
-      //       res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
-      //     )
-      //   )
-      //   .catch((err) => console.log(err));
-
-      // //// New Users ////
-      // report({
-      //   metrics: "ga:newusers",
-      //   startDate: `${date}daysAgo`,
-      //   endDate: "today",
-      // })
-      //   .then((res) =>
-      //     setNewUsers(
-      //       res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
-      //     )
-      //   )
-      //   .catch((err) => console.log(err));
-
-      // //// Pageviews ////
-      // report({
-      //   metrics: "ga:pageviews",
-      //   startDate: `${date}daysAgo`,
-      //   endDate: "today",
-      // })
-      //   .then((res) =>
-      //     setPageViews(
-      //       res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
-      //     )
-      //   )
-      //   .catch((err) => console.log(err));
-      // //// Averag e session duration ////
-      // report({
-      //   metrics: "ga:avgSessionDuration",
-      //   startDate: `${date}daysAgo`,
-      //   endDate: "today",
-      // })
-      //   .then((res) =>
-      //     setTime(
-      //       timeFormatter(
-      //         Math.round(
-      //           res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
-      //         )
-      //       )
-      //     )
-      //   )
-      //   .catch((err) => console.log(err));
-      // //// Sessions ////
-      // report({
-      //   metrics: "ga:sessions",
-      //   startDate: `${date}daysAgo`,
-      //   endDate: "today",
-      // })
-      //   .then((res) =>
-      //     setSessions(
-      //       res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
-      //     )
-      //   )
-      //   .catch((err) => console.log(err));
-      // //// Bounce rate ////
-      // report({
-      //   metrics: "ga:bounceRate",
-      //   startDate: `${date}daysAgo`,
-      //   endDate: "today",
-      // })
-      //   .then((res) =>
-      //     setBouncerate(
-      //       `${Math.round(
-      //         res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values[0]
-      //       )}%`
-      //     )
-      //   )
-      //   .catch((err) => console.log(err));
-    }, 1000);
-  }, [date, isSignedIn]);
+    );
+  };
 
   const [active, setActive] = useState("Users");
   return (
     <>
+      {console.log(gridMetrics)}
       {!isSignedIn ? (
         <>
           <div id="signin-button"></div>
@@ -146,44 +114,22 @@ export const Dashboard = () => {
           <section className="dashboard-overview">
             <h2 className="dashboard-overview__title">Overview</h2>
             <section className="dashboard-overview-container">
-              <div className="dashboard-overview-container__cards">
-                <CardItem
-                  name="Users"
-                  value={users}
-                  active={active}
-                  setActive={setActive}
-                />
-                <CardItem
-                  name="New Users"
-                  value={newUsers}
-                  active={active}
-                  setActive={setActive}
-                />
-                <CardItem
-                  name="Sessions"
-                  value={sessions}
-                  active={active}
-                  setActive={setActive}
-                />
-                <CardItem
-                  name="Avg Session duration"
-                  value={time}
-                  active={active}
-                  setActive={setActive}
-                />
-                <CardItem
-                  name="Pageviews"
-                  value={pageViews}
-                  active={active}
-                  setActive={setActive}
-                />
-                <CardItem
-                  name="Bounce rate"
-                  value={bouncerate}
-                  active={active}
-                  setActive={setActive}
-                />
-              </div>
+              {gridMetrics.length === 0 ? (
+                <OverviewGridLoader />
+              ) : (
+                <div className="dashboard-overview-container__cards">
+                  {gridMetrics.map((item) => {
+                    return (
+                      <CardItem
+                        name={item.name}
+                        value={item.value}
+                        active={active}
+                        setActive={setActive}
+                      />
+                    );
+                  })}
+                </div>
+              )}
               <div className="dashboard-overview-container__graph">
                 <TableHeader
                   className="table-header"
@@ -203,7 +149,7 @@ export const Dashboard = () => {
               <Table
                 title="Pages"
                 categories={tableHeaderCategories}
-                data={data}
+                data={pages}
               />
             </div>
             <div>

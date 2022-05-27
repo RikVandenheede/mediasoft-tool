@@ -35,3 +35,15 @@ export const DivicesLoader = () => (
     <circle cx="120" cy="200" r="75" width="20" height="15" />
   </ContentLoader>
 );
+
+export const OverviewGridLoader = () => (
+  <ContentLoader width="408" height="332">
+    {/* Only SVG shapes */}
+    <rect x="0" y="0" width="196" height="100" />
+    <rect x="0" y="116" width="196" height="100" />
+    <rect x="0" y="232" width="196" height="100" />
+    <rect x="212" y="0" width="196" height="100" />
+    <rect x="212" y="116" width="196" height="100" />
+    <rect x="212" y="232" width="196" height="100" />
+  </ContentLoader>
+);

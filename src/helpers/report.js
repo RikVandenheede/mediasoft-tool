@@ -36,10 +36,7 @@
 //   });
 // };
 
-export const report = ({ dimensions, metrics, startDate, endDate }) => {
-  console.log(dimensions);
-
-  const metricOrDimension = (metric, dimension) => {};
+export const report = ({ dimensions, metrics, startDate, endDate, order }) => {
   return window.gapi.client.request({
     path: "/v4/reports:batchGet",
     root: "https://analyticsreporting.googleapis.com/",
@@ -47,28 +44,32 @@ export const report = ({ dimensions, metrics, startDate, endDate }) => {
     body: {
       reportRequests: [
         {
-          viewId: "4206720", //enter your view ID here
+          viewId: process.env.REACT_APP_CLIENT_ID, //enter your view ID here
           dateRanges: [
             {
               startDate,
               endDate,
             },
           ],
-          metrics: [
-            {
-              expression: "ga:bounceRate",
-            },
-            {
-              expression: "ga:bounceRate",
-            },
-          ],
-          dimensions: dimensions
+          metrics: metrics
             ? [
-                {
-                  name: dimensions,
-                },
+                metrics.map((metric) => {
+                  return {
+                    expression: metric,
+                  };
+                }),
               ]
             : null,
+          dimensions: dimensions
+            ? [
+                dimensions.map((dimension) => {
+                  return {
+                    name: dimension,
+                  };
+                }),
+              ]
+            : null,
+          orderBys: order ? [order] : null,
         },
       ],
     },

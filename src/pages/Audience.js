@@ -9,6 +9,7 @@ import { Phone, Tablet, Laptop } from "../helpers/svg";
 import { useLoggedIn } from "../helpers/useLoggedIn";
 import { renderButton, checkSignedIn } from "../helpers/utils";
 import { percetageFormatter } from "../helpers/percentageFormatter";
+import { timeFormatter } from "../helpers/timeFormatter";
 
 export const Audience = () => {
   const tableHeaderCategories = [
@@ -20,85 +21,46 @@ export const Audience = () => {
     "Bounce rate",
   ];
 
-  // format data
-  const data = [
-    {
-      name: "https://testing",
-      values: [
-        {
-          Sessions: 34,
-          NewSessions: 34,
-          ExiNewUsers: 34,
-          AvgTimeOnPage: 34,
-          Exit: 34,
-          BounceRate: 34,
-        },
-      ],
-    },
-    {
-      page: "https://testing",
-      categories: [
-        {
-          Sessions: 34,
-          NewSessions: 34,
-          ExiNewUsers: 34,
-          AvgTimeOnPage: 34,
-          Exit: 34,
-          BounceRate: 34,
-        },
-      ],
-    },
-    {
-      page: "https://testing",
-      categories: [
-        {
-          Sessions: 34,
-          NewSessions: 34,
-          ExiNewUsers: 34,
-          AvgTimeOnPage: 34,
-          Exit: 34,
-          BounceRate: 34,
-        },
-      ],
-    },
-    {
-      page: "https://testing",
-      categories: [
-        {
-          Sessions: 34,
-          NewSessions: 34,
-          ExiNewUsers: 34,
-          AvgTimeOnPage: 34,
-          Exit: 34,
-          BounceRate: 34,
-        },
-      ],
-    },
-    {
-      page: "https://testing",
-      categories: [
-        {
-          Sessions: 34,
-          NewSessions: 34,
-          ExiNewUsers: 34,
-          AvgTimeOnPage: 34,
-          Exit: 34,
-          BounceRate: 34,
-        },
-      ],
-    },
-  ];
-
   const [devices, setDevices] = useState([]);
   const [countries, setCountries] = useState([]);
   const [languages, setLanguages] = useState([]);
+  const [ages, setAges] = useState([]);
   const isSignedIn = useLoggedIn();
 
   useEffect(() => {
     setTimeout(() => {
-      // // Devices ////
+      report({
+        dimensions: ["ga:userAgeBracket"],
+        metrics: [
+          "ga:sessions",
+          "ga:percentNewSessions",
+          "ga:newUsers",
+          "ga:avgTimeOnPage",
+          "ga:exitRate",
+          "ga:bounceRate",
+        ],
+        startDate: `7daysAgo`,
+        endDate: "today",
+      })
+        .then((res) =>
+          setAges(
+            res?.result?.reports[0].data?.rows.map((age) => {
+              return {
+                name: age.dimensions[0],
+                values: age.metrics[0].values.map((metric, i) => {
+                  if (i === 0 || i === 2) return metric;
+                  if (i === 3) return timeFormatter(Math.round(metric));
+                  else return `${Math.round(metric)}%`;
+                }),
+              };
+            })
+          )
+        )
+        .catch((err) => console.log(err));
+
+      // //// Devices ////
       // report({
-      //   dimensions: "ga:deviceCategory",
+      //   dimensions: ["ga:deviceCategory"],
       //   startDate: `7daysAgo`,
       //   endDate: "today",
       // })
@@ -115,7 +77,7 @@ export const Audience = () => {
       //   .catch((err) => console.log(err));
       // // Country ////
       // report({
-      //   dimensions: "ga:country",
+      //   dimensions: ["ga:country"],
       //   startDate: `7daysAgo`,
       //   endDate: "today",
       // })
@@ -135,7 +97,7 @@ export const Audience = () => {
       //   .catch((err) => console.log(err));
       // // Language ////
       // report({
-      //   dimensions: "ga:language",
+      //   dimensions: ["ga:language"],
       //   startDate: `7daysAgo`,
       //   endDate: "today",
       // })
@@ -156,8 +118,18 @@ export const Audience = () => {
     }, 1000);
   }, []);
 
+  const ageTableHeaderCategories = [
+    "Sessions",
+    "New Sessions",
+    "New Users",
+    "Avg time on page",
+    "Exit",
+    "Bounce rate",
+  ];
+
   return (
     <>
+      {console.log(ages)}
       {!isSignedIn ? (
         <>
           <div id="signin-button"></div>
@@ -170,11 +142,11 @@ export const Audience = () => {
             </div>
             <div className="audience-top__age">
               <h2 className="audience-top__title">Age</h2>
-              {/* <Table
+              <Table
                 title="Age"
-                categories={tableHeaderCategories}
-                data={data}
-              /> */}
+                categories={ageTableHeaderCategories}
+                data={ages}
+              />
             </div>
           </section>
           <section className="audience-bottom">
