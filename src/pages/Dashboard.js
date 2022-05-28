@@ -17,10 +17,14 @@ export const Dashboard = () => {
   const isSignedIn = useLoggedIn();
   const [pages, setPages] = useState([]);
   const [gridMetrics, setGridMetrics] = useState([]);
+  const [comparingPercentage, setComparingPercentage] = useState([]);
+
+  const [current, setCurrent] = useState([]);
+  const [previous, setPrevious] = useState([]);
 
   useEffect(() => {
     setTimeout(() => {
-      //// PAGES; ////
+      // // PAGES; ////
       // report({
       //   dimensions: ["ga:pagePath"],
       //   metrics: [
@@ -48,6 +52,7 @@ export const Dashboard = () => {
       //     )
       //   )
       //   .catch((e) => console.log(e));
+
       report({
         metrics: [
           "ga:users",
@@ -66,6 +71,30 @@ export const Dashboard = () => {
           )
         )
         .catch((e) => console.log(e));
+
+      report({
+        metrics: [
+          "ga:users",
+          "ga:newUsers",
+          "ga:avgSessionDuration",
+          "ga:sessions",
+          "ga:pageViews",
+          "ga:bounceRate",
+        ],
+        startDate: `${date * 2}daysAgo`,
+        endDate: `${date}daysAgo`,
+      })
+        .then((res) =>
+          setPrevious(
+            res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values.map(
+              (e) => {
+                return Math.round(e);
+              }
+            )
+          )
+        )
+
+        .catch((e) => console.log(e));
     }, 1000);
   }, [date, isSignedIn]);
 
@@ -77,6 +106,12 @@ export const Dashboard = () => {
   ];
 
   const gridMetricsFormatter = (metrics) => {
+    setCurrent(
+      metrics.map((e) => {
+        return Math.round(e);
+      })
+    );
+
     const titles = [
       "Users",
       "New Users",
@@ -101,10 +136,17 @@ export const Dashboard = () => {
     );
   };
 
+  // functie maken voor percentages door te geven.
+  // deel cuurent door prevuios => kijk dan of het positief of negatief is.
+  // deel dat getal door de previous of de current. en doe dan maal 100
+  // om dus te kijken of het rood of groen is (kijk naar het resultaat na de deling. positief of negatief)
+
   const [active, setActive] = useState("Users");
   return (
     <>
-      {console.log(gridMetrics)}
+      {console.log(current)}
+      {console.log(previous)}
+      {console.log((current[0] / previous[0]) * 100)}
       {!isSignedIn ? (
         <>
           <div id="signin-button"></div>
@@ -118,13 +160,14 @@ export const Dashboard = () => {
                 <OverviewGridLoader />
               ) : (
                 <div className="dashboard-overview-container__cards">
-                  {gridMetrics.map((item) => {
+                  {gridMetrics.map((item, i) => {
                     return (
                       <CardItem
                         name={item.name}
                         value={item.value}
                         active={active}
                         setActive={setActive}
+                        percentage={(current[i] / previous[i]) * 100}
                       />
                     );
                   })}

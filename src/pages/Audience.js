@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import { DoughnutChart } from "../components/atoms/DoughnutChart";
+
 import { Layout } from "../components/molecules/Layout";
 import { Table } from "../components/molecules/Table";
 import { DivicesLoader } from "../helpers/loaders";
@@ -24,6 +26,7 @@ export const Audience = () => {
   const [devices, setDevices] = useState([]);
   const [countries, setCountries] = useState([]);
   const [languages, setLanguages] = useState([]);
+  const [gender, setGender] = useState([]);
   const [ages, setAges] = useState([]);
   const isSignedIn = useLoggedIn();
 
@@ -58,63 +61,82 @@ export const Audience = () => {
         )
         .catch((err) => console.log(err));
 
-      // //// Devices ////
-      // report({
-      //   dimensions: ["ga:deviceCategory"],
-      //   startDate: `7daysAgo`,
-      //   endDate: "today",
-      // })
-      //   .then((res) =>
-      //     setDevices(
-      //       res?.result?.reports[0].data?.rows.map((device) => {
-      //         return {
-      //           name: device.dimensions[0],
-      //           value: device.metrics[0].values[0],
-      //         };
-      //       })
-      //     )
-      //   )
-      //   .catch((err) => console.log(err));
-      // // Country ////
-      // report({
-      //   dimensions: ["ga:country"],
-      //   startDate: `7daysAgo`,
-      //   endDate: "today",
-      // })
-      //   .then((res) =>
-      //     setCountries(
-      //       res?.result?.reports[0].data?.rows.map((country) => {
-      //         return {
-      //           name: country.dimensions[0],
-      //           values: [
-      //             country.metrics[0].values[0],
-      //             percetageFormatter(country.metrics[0].values[0], res),
-      //           ],
-      //         };
-      //       })
-      //     )
-      //   )
-      //   .catch((err) => console.log(err));
-      // // Language ////
-      // report({
-      //   dimensions: ["ga:language"],
-      //   startDate: `7daysAgo`,
-      //   endDate: "today",
-      // })
-      //   .then((res) =>
-      //     setLanguages(
-      //       res?.result?.reports[0].data?.rows.map((language) => {
-      //         return {
-      //           name: language.dimensions[0],
-      //           values: [
-      //             language.metrics[0].values[0],
-      //             percetageFormatter(language.metrics[0].values[0], res),
-      //           ],
-      //         };
-      //       })
-      //     )
-      //   )
-      //   .catch((err) => console.log(err));
+      report({
+        dimensions: ["ga:userGender"],
+        startDate: `7daysAgo`,
+        endDate: "today",
+      })
+        .then((res) =>
+          setGender(
+            res?.result?.reports[0].data?.rows.map((gender) => {
+              return {
+                name: gender.dimensions[0],
+                values: gender.metrics[0].values[0],
+              };
+            })
+          )
+        )
+        .catch((err) => console.log(err));
+
+      //// Devices ////
+      report({
+        dimensions: ["ga:deviceCategory"],
+        startDate: `7daysAgo`,
+        endDate: "today",
+      })
+        .then((res) =>
+          setDevices(
+            res?.result?.reports[0].data?.rows.map((device) => {
+              return {
+                name: device.dimensions[0],
+                value: device.metrics[0].values[0],
+              };
+            })
+          )
+        )
+        .catch((err) => console.log(err));
+
+      // Country ////
+      report({
+        dimensions: ["ga:country"],
+        startDate: `7daysAgo`,
+        endDate: "today",
+      })
+        .then((res) =>
+          setCountries(
+            res?.result?.reports[0].data?.rows.map((country) => {
+              return {
+                name: country.dimensions[0],
+                values: [
+                  country.metrics[0].values[0],
+                  percetageFormatter(country.metrics[0].values[0], res),
+                ],
+              };
+            })
+          )
+        )
+        .catch((err) => console.log(err));
+
+      // Language ////
+      report({
+        dimensions: ["ga:language"],
+        startDate: `7daysAgo`,
+        endDate: "today",
+      })
+        .then((res) =>
+          setLanguages(
+            res?.result?.reports[0].data?.rows.map((language) => {
+              return {
+                name: language.dimensions[0],
+                values: [
+                  language.metrics[0].values[0],
+                  percetageFormatter(language.metrics[0].values[0], res),
+                ],
+              };
+            })
+          )
+        )
+        .catch((err) => console.log(err));
     }, 1000);
   }, []);
 
@@ -129,7 +151,7 @@ export const Audience = () => {
 
   return (
     <>
-      {console.log(ages)}
+      {console.log(gender)}
       {!isSignedIn ? (
         <>
           <div id="signin-button"></div>
@@ -137,8 +159,9 @@ export const Audience = () => {
       ) : (
         <Layout className="audience" title="Audience">
           <section className="audience-top">
-            <div className="audience-top__genre">
+            <div className="audience-top__gender">
               <h2 className="audience-top__title">Gender</h2>
+              <DoughnutChart incoming={gender} />
             </div>
             <div className="audience-top__age">
               <h2 className="audience-top__title">Age</h2>

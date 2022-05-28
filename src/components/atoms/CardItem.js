@@ -1,6 +1,6 @@
 import { CardUsers } from "../../helpers/svg";
 
-export const CardItem = ({ name, value, active, setActive }) => {
+export const CardItem = ({ name, value, active, setActive, percentage }) => {
   return (
     <div
       onClick={() => setActive(name)}
@@ -14,7 +14,7 @@ export const CardItem = ({ name, value, active, setActive }) => {
 
       <div className="card-right">
         <p className="card-right__graph"></p>
-        <h4 className="card-right__percent">16.5%</h4>
+        <h4 className="card-right__percent">{percentage}%</h4>
       </div>
     </div>
   );
