@@ -1,40 +1,35 @@
-// Favicon
-// Tab Title
-// Logo in het blauw
-// custom Scrollbar, bij tables en default browser
-// Loader animation
+// Favicon //
+// Tab Title //
+// Logo in het blauw //
+// custom Scrollbar, bij tables en default browser //
+// percent maken bij grid door andere call //
+// Loader animation //
+// overview card border die circuleert als het active is //
+// bij divces een sort maken wie welke box krijgt //
+// tabel juist zetten //
+// pie chart gender => accent-red & blue //
+// ID in env file zetten //
+// Sketeton loader //
+// Bij opstart Calls maken om zo percenten te berekenen of op hetzelfde moment een call doen met number x2 om zo het percent TOV de week ervoor te berenekenen //
+// sommige tables miss soreteren van hoog naar laag //
+
+////////
+// Percent bij device = getal delen door totaalgetal x 100
+// logout functie maken
+// Table maken met useRef
+// chaching bij request
+// devices => percenten?
+// Aantal dagen kiezen op elke pagina.
 // paginas doorklikken
-// overview card border die circuleert als het active is
-// tabel juist zetten
 // hover op overwiew card, eerst klein stukje dan een helemaal
-// bij divces een sort maken wie welke box krijgt
-// pie chart gender => accent-red & blue
 // Country laten doorklikken naar een andere pagina => city laten zien
 // Mobile ook laten doorklikken naar eigen pagina
-
-// ID in env file zetten
+// tooltip maken voor hover over de linken
 
 //// QUESTIONS ////
 // hoe pas ik mijn tabel aan met het delect field? (state doortgeven parent <=> child)
 // waarom past de voert de useEffect zich niet nog eens uit nadat de state is geupdate
 // deze 6 kaartjes, maak ik 6 aparte calls?
 // tabel => hoe zorg ik ervoor dat mijn tableRow dezelfde verdeling(width) heft als mijn tableRow?
-
-////////
-// Percent en kleine chart weglaten
-// Volgorde kaarjes dashboard => users, new users. Sessions - session duration
-//display as table
-// Percent bij device = getal delen door totaalgetal x 100
-// Sketeton loader
-
-//Bij opstart Calls maken om zo percenten te berekenen of op hetzelfde moment een call doen met number x2 om zo het percent TOV de week ervoor te berenekenen
-
-//Table maken met useRef
-
-// chaching bij request
-
-// sommige tables miss soreteren van hoog naar laag
-
-//Mobile => percenten?
 
 ``;

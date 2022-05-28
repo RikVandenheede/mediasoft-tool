@@ -14,7 +14,10 @@
     svg {
       width: inherit;
       height: auto;
-      color: $color-primary;
+
+      g {
+        fill: $color-primary;
+      }
     }
   }
 

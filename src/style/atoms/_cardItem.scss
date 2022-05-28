@@ -70,6 +70,14 @@
     &__percent {
       color: $color-accent-green;
       align-self: flex-end;
+
+      &--red {
+        color: $color-accent-red;
+      }
+
+      &--green {
+        color: $color-accent-green;
+      }
     }
   }
 }

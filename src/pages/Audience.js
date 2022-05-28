@@ -4,7 +4,12 @@ import { DoughnutChart } from "../components/atoms/DoughnutChart";
 
 import { Layout } from "../components/molecules/Layout";
 import { Table } from "../components/molecules/Table";
-import { DivicesLoader } from "../helpers/loaders";
+import {
+  DivicesLoader,
+  GenderLoader,
+  TableRowLoaderBig,
+  TableRowLoaderSmall,
+} from "../helpers/loaders";
 import { report } from "../helpers/report";
 
 import { Phone, Tablet, Laptop } from "../helpers/svg";
@@ -32,96 +37,92 @@ export const Audience = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      report({
-        dimensions: ["ga:userAgeBracket"],
-        metrics: [
-          "ga:sessions",
-          "ga:percentNewSessions",
-          "ga:newUsers",
-          "ga:avgTimeOnPage",
-          "ga:exitRate",
-          "ga:bounceRate",
-        ],
-        startDate: `7daysAgo`,
-        endDate: "today",
-      })
-        .then((res) =>
-          setAges(
-            res?.result?.reports[0].data?.rows.map((age) => {
-              return {
-                name: age.dimensions[0],
-                values: age.metrics[0].values.map((metric, i) => {
-                  if (i === 0 || i === 2) return metric;
-                  if (i === 3) return timeFormatter(Math.round(metric));
-                  else return `${Math.round(metric)}%`;
-                }),
-              };
-            })
-          )
-        )
-        .catch((err) => console.log(err));
-
-      report({
-        dimensions: ["ga:userGender"],
-        startDate: `7daysAgo`,
-        endDate: "today",
-      })
-        .then((res) =>
-          setGender(
-            res?.result?.reports[0].data?.rows.map((gender) => {
-              return {
-                name: gender.dimensions[0],
-                values: gender.metrics[0].values[0],
-              };
-            })
-          )
-        )
-        .catch((err) => console.log(err));
-
-      //// Devices ////
-      report({
-        dimensions: ["ga:deviceCategory"],
-        startDate: `7daysAgo`,
-        endDate: "today",
-      })
-        .then((res) =>
-          setDevices(
-            res?.result?.reports[0].data?.rows.map((device) => {
-              return {
-                name: device.dimensions[0],
-                value: device.metrics[0].values[0],
-              };
-            })
-          )
-        )
-        .catch((err) => console.log(err));
-
-      // Country ////
-      report({
-        dimensions: ["ga:country"],
-        startDate: `7daysAgo`,
-        endDate: "today",
-      })
-        .then((res) =>
-          setCountries(
-            res?.result?.reports[0].data?.rows.map((country) => {
-              return {
-                name: country.dimensions[0],
-                values: [
-                  country.metrics[0].values[0],
-                  percetageFormatter(country.metrics[0].values[0], res),
-                ],
-              };
-            })
-          )
-        )
-        .catch((err) => console.log(err));
-
-      // Language ////
+      // report({
+      //   dimensions: ["ga:userAgeBracket"],
+      //   metrics: [
+      //     "ga:sessions",
+      //     "ga:percentNewSessions",
+      //     "ga:newUsers",
+      //     "ga:avgTimeOnPage",
+      //     "ga:exitRate",
+      //     "ga:bounceRate",
+      //   ],
+      //   startDate: `7daysAgo`,
+      //   endDate: "yesterday",
+      // })
+      //   .then((res) =>
+      //     setAges(
+      //       res?.result?.reports[0].data?.rows.map((age) => {
+      //         return {
+      //           name: age.dimensions[0],
+      //           values: age.metrics[0].values.map((metric, i) => {
+      //             if (i === 0 || i === 2) return metric;
+      //             if (i === 3) return timeFormatter(Math.round(metric));
+      //             else return `${Math.round(metric)}%`;
+      //           }),
+      //         };
+      //       })
+      //     )
+      //   )
+      //   .catch((err) => console.log(err));
+      // report({
+      //   dimensions: ["ga:userGender"],
+      //   startDate: `7daysAgo`,
+      //   endDate: "yesterday",
+      // })
+      //   .then((res) =>
+      //     setGender(
+      //       res?.result?.reports[0].data?.rows.map((gender) => {
+      //         return {
+      //           name: gender.dimensions[0],
+      //           values: gender.metrics[0].values[0],
+      //         };
+      //       })
+      //     )
+      //   )
+      //   .catch((err) => console.log(err));
+      // //// Devices ////
+      // report({
+      //   dimensions: ["ga:deviceCategory"],
+      //   startDate: `7daysAgo`,
+      //   endDate: "yesterday",
+      // })
+      //   .then((res) =>
+      //     setDevices(
+      //       res?.result?.reports[0].data?.rows.map((device) => {
+      //         return {
+      //           name: device.dimensions[0],
+      //           value: device.metrics[0].values[0],
+      //         };
+      //       })
+      //     )
+      //   )
+      //   .catch((err) => console.log(err));
+      // // Country ////
+      // report({
+      //   dimensions: ["ga:country"],
+      //   startDate: `7daysAgo`,
+      //   endDate: "yesterday",
+      // })
+      //   .then((res) =>
+      //     setCountries(
+      //       res?.result?.reports[0].data?.rows.map((country) => {
+      //         return {
+      //           name: country.dimensions[0],
+      //           values: [
+      //             country.metrics[0].values[0],
+      //             percetageFormatter(country.metrics[0].values[0], res),
+      //           ],
+      //         };
+      //       })
+      //     )
+      //   )
+      //   .catch((err) => console.log(err));
+      //// Language ////
       report({
         dimensions: ["ga:language"],
         startDate: `7daysAgo`,
-        endDate: "today",
+        endDate: "yesterday",
       })
         .then((res) =>
           setLanguages(
@@ -151,7 +152,6 @@ export const Audience = () => {
 
   return (
     <>
-      {console.log(gender)}
       {!isSignedIn ? (
         <>
           <div id="signin-button"></div>
@@ -161,15 +161,24 @@ export const Audience = () => {
           <section className="audience-top">
             <div className="audience-top__gender">
               <h2 className="audience-top__title">Gender</h2>
-              <DoughnutChart incoming={gender} />
+              {gender.length === 0 ? (
+                <GenderLoader />
+              ) : (
+                <DoughnutChart incoming={gender} />
+              )}
             </div>
             <div className="audience-top__age">
               <h2 className="audience-top__title">Age</h2>
-              <Table
-                title="Age"
-                categories={ageTableHeaderCategories}
-                data={ages}
-              />
+              {ages.length === 0 ? (
+                <TableRowLoaderBig />
+              ) : (
+                <Table
+                  className="age-table"
+                  title="Age"
+                  categories={ageTableHeaderCategories}
+                  data={ages}
+                />
+              )}
             </div>
           </section>
           <section className="audience-bottom">
@@ -205,21 +214,31 @@ export const Audience = () => {
                   })
               )}
             </div>
-            <div className="audience-bottom__city">
+            <div className="audience-bottom__country">
               <h2 className="audience-top__title">Country</h2>
-              <Table
-                title="country"
-                categories={["sessions", "% sessions"]}
-                data={countries.sort((a, b) => b.values[0] - a.values[0])}
-              />
+              {countries.length === 0 ? (
+                <TableRowLoaderSmall />
+              ) : (
+                <Table
+                  className="country-table"
+                  title="country"
+                  categories={["sessions", "% sessions"]}
+                  data={countries.sort((a, b) => b.values[0] - a.values[0])}
+                />
+              )}
             </div>
             <div className="audience-bottom__language">
               <h2 className="audience-top__title">Languages</h2>
-              <Table
-                title="Language"
-                categories={["sessions", "% sessions"]}
-                data={languages.sort((a, b) => b.values[0] - a.values[0])}
-              />
+              {languages.length === 0 ? (
+                <TableRowLoaderSmall />
+              ) : (
+                <Table
+                  className="languages-table"
+                  title="Language"
+                  categories={["sessions", "% sessions"]}
+                  data={languages.sort((a, b) => b.values[0] - a.values[0])}
+                />
+              )}
             </div>
           </section>
         </Layout>

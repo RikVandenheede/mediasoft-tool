@@ -14,7 +14,16 @@ export const CardItem = ({ name, value, active, setActive, percentage }) => {
 
       <div className="card-right">
         <p className="card-right__graph"></p>
-        <h4 className="card-right__percent">{percentage}%</h4>
+        <h4
+          className={
+            percentage < 0
+              ? "card-right__percent card-right__percent--red"
+              : "card-right__percent card-right__percent--green"
+          }
+        >
+          {percentage < 0 ? percentage.slice(1, percentage.length) : percentage}
+          %
+        </h4>
       </div>
     </div>
   );

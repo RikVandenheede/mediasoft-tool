@@ -18,6 +18,29 @@
       max-height: 332px;
       width: 100%;
     }
+
+    .age-table.table-body__row__categories {
+      p {
+        &:nth-child(1) {
+          min-width: 51px;
+        }
+        &:nth-child(2) {
+          min-width: 81px;
+        }
+        &:nth-child(3) {
+          min-width: 63px;
+        }
+        &:nth-child(4) {
+          min-width: 106px;
+        }
+        &:nth-child(5) {
+          min-width: 22px;
+        }
+        &:nth-child(6) {
+          min-width: 73px;
+        }
+      }
+    }
   }
 
   &-bottom {
@@ -28,6 +51,32 @@
 
     &__title {
       margin: 0 0 20px 0;
+    }
+
+    &__country {
+      .country-table.table-body__row__categories {
+        p {
+          &:nth-child(1) {
+            width: 49px;
+          }
+          &:nth-child(2) {
+            width: 63px;
+          }
+        }
+      }
+    }
+
+    &__language {
+      .languages-table.table-body__row__categories {
+        p {
+          &:nth-child(1) {
+            width: 49px;
+          }
+          &:nth-child(2) {
+            width: 63px;
+          }
+        }
+      }
     }
 
     &__devices {
