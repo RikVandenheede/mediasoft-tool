@@ -67,6 +67,7 @@ a {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: $color-primary;
+  border-radius: 5px;
 }
 
 /* Handle on hover */

@@ -18,82 +18,83 @@ export const Dashboard = () => {
   const isSignedIn = useLoggedIn();
   const [pages, setPages] = useState([]);
   const [gridMetrics, setGridMetrics] = useState([]);
-  const [comparingPercentage, setComparingPercentage] = useState([]);
   const [active, setActive] = useState("Users");
-
   const [current, setCurrent] = useState([]);
   const [previous, setPrevious] = useState([]);
+  const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
     setTimeout(() => {
-      // // PAGES; ////
-      // report({
-      //   dimensions: ["ga:pagePath"],
-      //   metrics: [
-      //     "ga:pageViews",
-      //     "ga:avgTimeOnPage",
-      //     "ga:exitRate",
-      //     "ga:bounceRate",
-      //   ],
-      //   startDate: `${date}daysAgo`,
-      //   endDate: "yesterday",
-      //   order: { fieldName: "ga:pageViews", sortOrder: "DESCENDING" },
-      // })
-      //   .then((res) =>
-      //     setPages(
-      //       res?.result?.reports[0]?.data?.rows.map((page) => {
-      //         return {
-      //           name: page.dimensions[0],
-      //           values: page.metrics[0].values.map((metric, i) => {
-      //             if (i === 0) return metric;
-      //             else if (i === 1) return timeFormatter(Math.round(metric));
-      //             else return `${Math.round(metric)}%`;
-      //           }),
-      //         };
-      //       })
-      //     )
-      //   )
-      //   .catch((e) => console.log(e));
-      // report({
-      //   metrics: [
-      //     "ga:users",
-      //     "ga:newUsers",
-      //     "ga:avgSessionDuration",
-      //     "ga:sessions",
-      //     "ga:pageViews",
-      //     "ga:bounceRate",
-      //   ],
-      //   startDate: `${date}daysAgo`,
-      //   endDate: "yesterday",
-      // })
-      //   .then((res) =>
-      //     gridMetricsFormatter(
-      //       res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values
-      //     )
-      //   )
-      //   .catch((e) => console.log(e));
-      // report({
-      //   metrics: [
-      //     "ga:users",
-      //     "ga:newUsers",
-      //     "ga:avgSessionDuration",
-      //     "ga:sessions",
-      //     "ga:pageViews",
-      //     "ga:bounceRate",
-      //   ],
-      //   startDate: `${date * 2}daysAgo`,
-      //   endDate: `${+date + 1}daysAgo`,
-      // })
-      //   .then((res) =>
-      //     setPrevious(
-      //       res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values.map(
-      //         (e) => {
-      //           return Math.round(e);
-      //         }
-      //       )
-      //     )
-      //   )
-      //   .catch((e) => console.log(e));
+      // PAGES; ////
+      report({
+        dimensions: ["ga:pagePath"],
+        metrics: [
+          "ga:pageViews",
+          "ga:avgTimeOnPage",
+          "ga:exitRate",
+          "ga:bounceRate",
+        ],
+        startDate: `${date}daysAgo`,
+        endDate: "yesterday",
+        order: { fieldName: "ga:pageViews", sortOrder: "DESCENDING" },
+      })
+        .then((res) =>
+          setPages(
+            res?.result?.reports[0]?.data?.rows.map((page) => {
+              return {
+                name: page.dimensions[0],
+                values: page.metrics[0].values.map((metric, i) => {
+                  if (i === 0) return metric;
+                  else if (i === 1) return timeFormatter(Math.round(metric));
+                  else return `${Math.round(metric)}%`;
+                }),
+              };
+            })
+          )
+        )
+        .catch((e) => console.log(e));
+      report({
+        dimensions: ["ga:date"],
+        metrics: [
+          "ga:users",
+          "ga:newUsers",
+          "ga:avgSessionDuration",
+          "ga:sessions",
+          "ga:pageViews",
+          "ga:bounceRate",
+        ],
+        startDate: `${date}daysAgo`,
+        endDate: "yesterday",
+      })
+        .then((res) =>
+          gridMetricsFormatter(
+            res?.result?.reports[0]?.data?.totals[0]?.values,
+            res?.result?.reports[0]?.data?.rows
+          )
+        )
+        .catch((e) => console.log(e));
+      report({
+        metrics: [
+          "ga:users",
+          "ga:newUsers",
+          "ga:avgSessionDuration",
+          "ga:sessions",
+          "ga:pageViews",
+          "ga:bounceRate",
+        ],
+        startDate: `${date * 2}daysAgo`,
+        endDate: `${+date + 1}daysAgo`,
+      })
+        .then((res) =>
+          setPrevious(
+            res?.result?.reports[0]?.data?.rows[0]?.metrics[0]?.values.map(
+              (e) => {
+                return Math.round(e);
+              }
+            )
+          )
+        )
+        .catch((e) => console.log(e));
     }, 1000);
   }, [date, isSignedIn]);
 
@@ -104,12 +105,9 @@ export const Dashboard = () => {
     "Bounce rate",
   ];
 
-  const gridMetricsFormatter = (metrics) => {
-    setCurrent(
-      metrics.map((e) => {
-        return Math.round(e);
-      })
-    );
+  // This is data for the Table and the Gridoverview
+  const gridMetricsFormatter = (metricsTotal, metricsByDay) => {
+    console.log(metricsByDay);
 
     const titles = [
       "Users",
@@ -120,8 +118,28 @@ export const Dashboard = () => {
       "Bounce Rate",
     ];
 
+    setCurrent(
+      metricsTotal.map((e) => {
+        return Math.round(e);
+      })
+    );
+
+    setTableData(
+      metricsByDay.map((day) => {
+        return {
+          date: day.dimensions[0],
+          values: day.metrics[0].values.map((item, i) => {
+            return {
+              name: titles[i],
+              value: Math.round(item),
+            };
+          }),
+        };
+      })
+    );
+
     setGridMetrics(
-      metrics.map((metric, i) => {
+      metricsTotal.map((metric, i) => {
         return {
           name: titles[i],
           value:
@@ -135,11 +153,6 @@ export const Dashboard = () => {
     );
   };
 
-  // functie maken voor percentages door te geven.
-  // deel current door prevuios => kijk dan of het positief of negatief is.
-  // deel dat getal door de previous of de current. en doe dan maal 100
-  // om dus te kijken of het rood of groen is (kijk naar het resultaat na de deling. positief of negatief)
-
   const correctPercentage = (curr, prev) => {
     let myNumber = ((curr - prev) / curr) * 100;
     return myNumber.toFixed(1);
@@ -147,12 +160,13 @@ export const Dashboard = () => {
 
   return (
     <>
+      {/* {console.log(tableData)} */}
       {!isSignedIn ? (
         <>
           <div id="signin-button"></div>
         </>
       ) : (
-        <Layout className="dashboard" title="Page Insights">
+        <Layout className="dashboard" title="Page Insights" setDate={setDate}>
           <section className="dashboard-overview">
             <h2 className="dashboard-overview__title">Overview</h2>
             <section className="dashboard-overview-container">
@@ -177,10 +191,10 @@ export const Dashboard = () => {
                 <TableHeader
                   className="table-header"
                   title={active}
-                  selectOptions={["7 days", "30 days", "90 days", "180 days"]}
-                  setDate={setDate}
+                  // selectOptions={["7 days", "30 days", "90 days", "180 days"]}
+                  // setDate={setDate}
                 />
-                <LineChart />
+                <LineChart tableData={tableData} active={active} />
               </div>
             </section>
           </section>
@@ -203,11 +217,11 @@ export const Dashboard = () => {
             <div>
               <h2 className="dashboard-bottom__title">Live Users</h2>
               <div className="dashboard-bottom__live-container">
-                {/* <div className="dashboard-bottom__live">
+                <div className="dashboard-bottom__live">
                   <span>14</span>
-                </div> */}
+                </div>
 
-                <div></div>
+                {/* <div></div> */}
               </div>
             </div>
           </section>

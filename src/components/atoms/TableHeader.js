@@ -10,8 +10,7 @@ export const TableHeader = ({
       <div className={`${className}__title`}>
         <p>{title}</p>
       </div>
-
-      {selectOptions ? (
+      {/* {selectOptions ? (
         <select onChange={(e) => setDate(e.target.value.split(" ")[0])}>
           {selectOptions?.map((option, i) => (
             <option key={i} value={option.value}>
@@ -19,13 +18,13 @@ export const TableHeader = ({
             </option>
           ))}
         </select>
-      ) : (
-        <div className={`${className}__categories`}>
-          {categories.map((categorie, i) => (
-            <p key={i}>{categorie}</p>
-          ))}
-        </div>
-      )}
+      ) : ( */}
+      <div className={`${className}__categories`}>
+        {categories?.map((categorie, i) => (
+          <p key={i}>{categorie}</p>
+        ))}
+      </div>
+      {/* )} */}
     </div>
   );
 };

@@ -35,7 +35,7 @@ export const DoughnutChart = ({ incoming }) => {
       {
         label: "Gender",
         data: incoming.map((e) => e.values),
-        backgroundColor: ["#6c5dd3", "#78e0b5"],
+        backgroundColor: ["#fd6a84", "#6c5dd3"],
         pointBackgroundColor: "rgba(255,206,86,0.2)",
       },
     ],

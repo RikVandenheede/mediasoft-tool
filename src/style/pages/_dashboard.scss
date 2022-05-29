@@ -64,15 +64,15 @@
     justify-content: center;
     padding: 70px 0 0 0;
 
-    & div {
-      width: 0;
-      height: 0;
-      border-top: 60px solid transparent;
-      border-bottom: 60px solid transparent;
+    // & div {
+    //   width: 0;
+    //   height: 0;
+    //   border-top: 60px solid transparent;
+    //   border-bottom: 60px solid transparent;
 
-      border-left: 60px solid green;
-      border-radius: 5px;
-    }
+    //   border-left: 60px solid green;
+    //   border-radius: 5px;
+    // }
   }
 
   &__live {

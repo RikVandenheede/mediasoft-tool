@@ -32,4 +32,9 @@
 // deze 6 kaartjes, maak ik 6 aparte calls?
 // tabel => hoe zorg ik ervoor dat mijn tableRow dezelfde verdeling(width) heft als mijn tableRow?
 
+// functie maken voor percentages door te geven.
+// deel current door prevuios => kijk dan of het positief of negatief is.
+// deel dat getal door de previous of de current. en doe dan maal 100
+// om dus te kijken of het rood of groen is (kijk naar het resultaat na de deling. positief of negatief)
+
 ``;

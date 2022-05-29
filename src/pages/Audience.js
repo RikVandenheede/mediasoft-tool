@@ -14,20 +14,11 @@ import { report } from "../helpers/report";
 
 import { Phone, Tablet, Laptop } from "../helpers/svg";
 import { useLoggedIn } from "../helpers/useLoggedIn";
-import { renderButton, checkSignedIn } from "../helpers/utils";
 import { percetageFormatter } from "../helpers/percentageFormatter";
 import { timeFormatter } from "../helpers/timeFormatter";
 
 export const Audience = () => {
-  const tableHeaderCategories = [
-    "Sessions",
-    "New Sessions",
-    "New Users",
-    "Avg time on page",
-    "Exit",
-    "Bounce rate",
-  ];
-
+  const [date, setDate] = useState("7");
   const [devices, setDevices] = useState([]);
   const [countries, setCountries] = useState([]);
   const [languages, setLanguages] = useState([]);
@@ -37,91 +28,91 @@ export const Audience = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      // report({
-      //   dimensions: ["ga:userAgeBracket"],
-      //   metrics: [
-      //     "ga:sessions",
-      //     "ga:percentNewSessions",
-      //     "ga:newUsers",
-      //     "ga:avgTimeOnPage",
-      //     "ga:exitRate",
-      //     "ga:bounceRate",
-      //   ],
-      //   startDate: `7daysAgo`,
-      //   endDate: "yesterday",
-      // })
-      //   .then((res) =>
-      //     setAges(
-      //       res?.result?.reports[0].data?.rows.map((age) => {
-      //         return {
-      //           name: age.dimensions[0],
-      //           values: age.metrics[0].values.map((metric, i) => {
-      //             if (i === 0 || i === 2) return metric;
-      //             if (i === 3) return timeFormatter(Math.round(metric));
-      //             else return `${Math.round(metric)}%`;
-      //           }),
-      //         };
-      //       })
-      //     )
-      //   )
-      //   .catch((err) => console.log(err));
-      // report({
-      //   dimensions: ["ga:userGender"],
-      //   startDate: `7daysAgo`,
-      //   endDate: "yesterday",
-      // })
-      //   .then((res) =>
-      //     setGender(
-      //       res?.result?.reports[0].data?.rows.map((gender) => {
-      //         return {
-      //           name: gender.dimensions[0],
-      //           values: gender.metrics[0].values[0],
-      //         };
-      //       })
-      //     )
-      //   )
-      //   .catch((err) => console.log(err));
-      // //// Devices ////
-      // report({
-      //   dimensions: ["ga:deviceCategory"],
-      //   startDate: `7daysAgo`,
-      //   endDate: "yesterday",
-      // })
-      //   .then((res) =>
-      //     setDevices(
-      //       res?.result?.reports[0].data?.rows.map((device) => {
-      //         return {
-      //           name: device.dimensions[0],
-      //           value: device.metrics[0].values[0],
-      //         };
-      //       })
-      //     )
-      //   )
-      //   .catch((err) => console.log(err));
-      // // Country ////
-      // report({
-      //   dimensions: ["ga:country"],
-      //   startDate: `7daysAgo`,
-      //   endDate: "yesterday",
-      // })
-      //   .then((res) =>
-      //     setCountries(
-      //       res?.result?.reports[0].data?.rows.map((country) => {
-      //         return {
-      //           name: country.dimensions[0],
-      //           values: [
-      //             country.metrics[0].values[0],
-      //             percetageFormatter(country.metrics[0].values[0], res),
-      //           ],
-      //         };
-      //       })
-      //     )
-      //   )
-      //   .catch((err) => console.log(err));
-      //// Language ////
+      report({
+        dimensions: ["ga:userAgeBracket"],
+        metrics: [
+          "ga:sessions",
+          "ga:percentNewSessions",
+          "ga:newUsers",
+          "ga:avgTimeOnPage",
+          "ga:exitRate",
+          "ga:bounceRate",
+        ],
+        startDate: `${date}daysAgo`,
+        endDate: "yesterday",
+      })
+        .then((res) =>
+          setAges(
+            res?.result?.reports[0].data?.rows.map((age) => {
+              return {
+                name: age.dimensions[0],
+                values: age.metrics[0].values.map((metric, i) => {
+                  if (i === 0 || i === 2) return metric;
+                  if (i === 3) return timeFormatter(Math.round(metric));
+                  else return `${Math.round(metric)}%`;
+                }),
+              };
+            })
+          )
+        )
+        .catch((err) => console.log(err));
+      report({
+        dimensions: ["ga:userGender"],
+        startDate: `${date}daysAgo`,
+        endDate: "yesterday",
+      })
+        .then((res) =>
+          setGender(
+            res?.result?.reports[0].data?.rows.map((gender) => {
+              return {
+                name: gender.dimensions[0],
+                values: gender.metrics[0].values[0],
+              };
+            })
+          )
+        )
+        .catch((err) => console.log(err));
+      //// Devices ////
+      report({
+        dimensions: ["ga:deviceCategory"],
+        startDate: `${date}daysAgo`,
+        endDate: "yesterday",
+      })
+        .then((res) =>
+          setDevices(
+            res?.result?.reports[0].data?.rows.map((device) => {
+              return {
+                name: device.dimensions[0],
+                value: device.metrics[0].values[0],
+              };
+            })
+          )
+        )
+        .catch((err) => console.log(err));
+      // Country ////
+      report({
+        dimensions: ["ga:country"],
+        startDate: `${date}daysAgo`,
+        endDate: "yesterday",
+      })
+        .then((res) =>
+          setCountries(
+            res?.result?.reports[0].data?.rows.map((country) => {
+              return {
+                name: country.dimensions[0],
+                values: [
+                  country.metrics[0].values[0],
+                  percetageFormatter(country.metrics[0].values[0], res),
+                ],
+              };
+            })
+          )
+        )
+        .catch((err) => console.log(err));
+      // Language ////
       report({
         dimensions: ["ga:language"],
-        startDate: `7daysAgo`,
+        startDate: `${date}daysAgo`,
         endDate: "yesterday",
       })
         .then((res) =>
@@ -139,7 +130,7 @@ export const Audience = () => {
         )
         .catch((err) => console.log(err));
     }, 1000);
-  }, []);
+  }, [date]);
 
   const ageTableHeaderCategories = [
     "Sessions",
@@ -157,7 +148,7 @@ export const Audience = () => {
           <div id="signin-button"></div>
         </>
       ) : (
-        <Layout className="audience" title="Audience">
+        <Layout className="audience" title="Audience" setDate={setDate}>
           <section className="audience-top">
             <div className="audience-top__gender">
               <h2 className="audience-top__title">Gender</h2>

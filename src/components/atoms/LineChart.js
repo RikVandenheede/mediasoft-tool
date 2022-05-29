@@ -24,55 +24,21 @@ ChartJS.register(
   LineElement
 );
 
-export const LineChart = () => {
-  // let data = {
-  //   labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange", "Orange"],
-  //   datasets: [
-  //     {
-  //       label: "# of Votes",
-  //       data: [12, 19, 3, 5, 2, 3, 33],
-  //       backgroundColor: [
-  //         "rgba(255, 99, 132, 0.2)",
-  //         "rgba(54, 162, 235, 0.2)",
-  //         "rgba(255, 206, 86, 0.2)",
-  //         "rgba(75, 192, 192, 0.2)",
-  //         "rgba(153, 102, 255, 0.2)",
-  //         "rgba(255, 159, 64, 0.2)",
-  //         "rgba(255, 159, 64, 0.2)",
-  //       ],
-  //       borderColor: [
-  //         "rgba(255, 99, 132, 1)",
-  //         "rgba(54, 162, 235, 1)",
-  //         "rgba(255, 206, 86, 1)",
-  //         "rgba(75, 192, 192, 1)",
-  //         "rgba(153, 102, 255, 1)",
-  //         "rgba(255, 159, 64, 1)",
-  //         "rgba(255, 159, 64, 0.2)",
-  //       ],
-  //       borderWidth: 1,
-  //     },
-  //   ],
-  // };
+export const LineChart = ({ tableData, active }) => {
+  const correctData = tableData.map((item) => {
+    for (let i = 0; i < item.values.length; i++) {
+      if (item.values[i].name === active) return item.values[i].value;
+    }
+  });
 
-  // let options = {
-  //   scales: {
-  //     y: {
-  //       beginAtZero: true,
-  //     },
-  //   },
-  //   elements: {
-  //     line: {
-  //       tension: 0, // disables bezier curves
-  //     },
-  //   },
-  // };
+  console.log(correctData);
 
   const data = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+    labels: tableData.map((item) => item.date),
     datasets: [
       {
-        label: "Second dataset",
-        data: [33, 25, 35, 51, 54, 76, 54],
+        label: active,
+        data: correctData,
         backgroundColor: "#7e70d64d",
         borderColor: "#6c5dd3",
         cubicInterpolationMode: "monotone",
@@ -84,7 +50,9 @@ export const LineChart = () => {
   const options = {
     responsive: true,
     plugins: {
-      legend: {},
+      legend: {
+        display: false,
+      },
       title: {
         display: false,
         text: "Badpages",

@@ -37,8 +37,6 @@
 // };
 
 export const report = ({ dimensions, metrics, startDate, endDate, order }) => {
-  console.log(startDate);
-  console.log(endDate);
   return window.gapi.client.request({
     path: "/v4/reports:batchGet",
     root: "https://analyticsreporting.googleapis.com/",

@@ -5,7 +5,6 @@ import { TableRowLoaderSmall } from "../../helpers/loaders";
 
 //// Object bstaat uit {name: "", values: [{}]} ////
 export const Table = ({ title, categories, data, className }) => {
-  console.log("dataaaaaaaa", data);
   return (
     <div className={`${className} table`}>
       <TableHeader
