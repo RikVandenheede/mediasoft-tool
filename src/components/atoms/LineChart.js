@@ -31,10 +31,18 @@ export const LineChart = ({ tableData, active }) => {
     }
   });
 
-  console.log(correctData);
+  let test = "20220529";
+
+  console.log();
 
   const data = {
-    labels: tableData.map((item) => item.date),
+    labels: tableData.map(
+      (item) =>
+        `${item.date.substring(6, 8)}/${item.date.substring(
+          4,
+          6
+        )}/${item.date.substring(0, 4)}`
+    ),
     datasets: [
       {
         label: active,
