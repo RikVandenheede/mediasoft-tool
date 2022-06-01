@@ -1,0 +1,38 @@
+.acquisition {
+  h2 {
+    margin: 40px 0 20px 0;
+  }
+  &__socials {
+    h2 {
+      margin: 0 0 20px 0;
+    }
+  }
+
+  &-table.table-body__row__categories {
+    p {
+      &:nth-child(1) {
+        width: 50px;
+      }
+      &:nth-child(2) {
+        width: 126px;
+      }
+      &:nth-child(3) {
+        width: 64px;
+      }
+      &:nth-child(4) {
+        width: 134px;
+      }
+      &:nth-child(5) {
+        width: 73px;
+      }
+    }
+  }
+
+  &-table.table-header__categories {
+    p {
+      &:nth-child(1) {
+        margin-right: 35px;
+      }
+    }
+  }
+}

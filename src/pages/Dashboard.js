@@ -22,6 +22,7 @@ export const Dashboard = () => {
   const [current, setCurrent] = useState([]);
   const [previous, setPrevious] = useState([]);
   const [tableData, setTableData] = useState([]);
+  const [visitsToday, setVisitsToday] = useState([]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -97,6 +98,21 @@ export const Dashboard = () => {
         .catch((e) => console.log(e));
     }, 1000);
   }, [date, isSignedIn]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      report({
+        dimensions: ["ga:day"],
+        metrics: ["ga:1dayUsers"],
+        startDate: `today`,
+        endDate: "today",
+      })
+        .then((res) =>
+          setVisitsToday(res?.result?.reports[0]?.data?.totals[0]?.values[0])
+        )
+        .catch((e) => console.log(e));
+    }, 1000);
+  });
 
   const tableHeaderCategories = [
     "Pageviews",
@@ -188,12 +204,7 @@ export const Dashboard = () => {
                 </div>
               )}
               <div className="dashboard-overview-container__graph">
-                <TableHeader
-                  className="table-header"
-                  title={active}
-                  // selectOptions={["7 days", "30 days", "90 days", "180 days"]}
-                  // setDate={setDate}
-                />
+                <TableHeader className="table-header" title={active} />
                 <LineChart tableData={tableData} active={active} />
               </div>
             </section>
@@ -215,10 +226,10 @@ export const Dashboard = () => {
               )}
             </div>
             <div>
-              <h2 className="dashboard-bottom__title">Live Users</h2>
+              <h2 className="dashboard-bottom__title">Visits today</h2>
               <div className="dashboard-bottom__live-container">
                 <div className="dashboard-bottom__live">
-                  <span>14</span>
+                  <span>{visitsToday}</span>
                 </div>
 
                 {/* <div></div> */}

@@ -39,19 +39,21 @@ export const NavbarUser = ({ className }) => {
   );
 };
 
-export const NavbarSocial = ({ className }) => {
+export const NavbarContract = ({ className }) => {
   return (
     <svg
       className={className}
-      width="30"
-      height="33"
-      viewBox="0 0 30 33"
-      fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
     >
+      <title>Contract</title>
       <path
-        d="M25.0002 22.4811C24.3268 22.4808 23.6604 22.6171 23.0412 22.8816C22.422 23.1461 21.8628 23.5333 21.3975 24.02L9.83634 17.5153C10.0603 16.6743 10.0603 15.7894 9.83634 14.9484L21.3975 8.44368C22.2394 9.3165 23.3706 9.85243 24.5792 9.95107C25.7879 10.0497 26.991 9.70428 27.9633 8.97951C28.9355 8.25473 29.6101 7.20034 29.8608 6.01386C30.1114 4.82738 29.9209 3.59022 29.3248 2.53415C28.7287 1.47808 27.7681 0.675567 26.6228 0.276949C25.4775 -0.121669 24.2262 -0.0890387 23.1033 0.368726C21.9803 0.826491 21.0628 1.67798 20.5226 2.76368C19.9824 3.84938 19.8566 5.09479 20.1687 6.26659L8.60758 12.7713C7.91699 12.0513 7.02677 11.5543 6.05142 11.3444C5.07608 11.1344 4.06023 11.2211 3.13455 11.5933C2.20887 11.9654 1.41572 12.606 0.85711 13.4326C0.298504 14.2593 0 15.2341 0 16.2318C0 17.2295 0.298504 18.2044 0.85711 19.031C1.41572 19.8577 2.20887 20.4983 3.13455 20.8704C4.06023 21.2426 5.07608 21.3292 6.05142 21.1193C7.02677 20.9094 7.91699 20.4124 8.60758 19.6924L20.1687 26.1971C19.9007 27.2062 19.9553 28.274 20.325 29.2505C20.6947 30.227 21.3608 31.0633 22.2299 31.6419C23.0991 32.2206 24.1276 32.5126 25.1711 32.477C26.2146 32.4414 27.2208 32.0799 28.0485 31.4434C28.8762 30.8068 29.4837 29.9271 29.786 28.9276C30.0882 27.9282 30.0699 26.8592 29.7337 25.8706C29.3975 24.8821 28.7602 24.0237 27.9112 23.4158C27.0623 22.8079 26.0443 22.481 25.0002 22.4811Z"
-        fill="#0A006F"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="32"
+        d="M304 416V304h112M314.2 314.23L432 432M208 96v112H96M197.8 197.77L80 80M416 208H304V96M314.23 197.8L432 80M96 304h112v112M197.77 314.2L80 432"
       />
     </svg>
   );
@@ -126,6 +128,158 @@ export const CardUsers = ({ className }) => {
         strokeLinecap="round"
         strokeMiterlimit="10"
         strokeWidth="32"
+      />
+    </svg>
+  );
+};
+
+export const CardNewUsers = ({ className }) => {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+    >
+      <title>Person Add</title>
+      <path
+        d="M376 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="32"
+      />
+      <path
+        d="M288 304c-87 0-175.3 48-191.64 138.6-2 10.92 4.21 21.4 15.65 21.4H464c11.44 0 17.62-10.48 15.65-21.4C463.3 352 375 304 288 304z"
+        fill="none"
+        stroke="currentColor"
+        strokeMiterlimit="10"
+        strokeWidth="32"
+      />
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="32"
+        d="M88 176v112M144 232H32"
+      />
+    </svg>
+  );
+};
+
+export const CardAvgSessionDuration = ({ className }) => {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+    >
+      <title>Time</title>
+      <path
+        d="M256 64C150 64 64 150 64 256s86 192 192 192 192-86 192-192S362 64 256 64z"
+        fill="none"
+        stroke="currentColor"
+        strokeMiterlimit="10"
+        strokeWidth="32"
+      />
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="32"
+        d="M256 128v144h96"
+      />
+    </svg>
+  );
+};
+
+export const CardSessions = ({ className }) => {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+    >
+      <title>Globe</title>
+      <path
+        d="M256 48C141.13 48 48 141.13 48 256s93.13 208 208 208 208-93.13 208-208S370.87 48 256 48z"
+        fill="none"
+        stroke="currentColor"
+        strokeMiterlimit="10"
+        strokeWidth="32"
+      />
+      <path
+        d="M256 48c-58.07 0-112.67 93.13-112.67 208S197.93 464 256 464s112.67-93.13 112.67-208S314.07 48 256 48z"
+        fill="none"
+        stroke="currentColor"
+        strokeMiterlimit="10"
+        strokeWidth="32"
+      />
+      <path
+        d="M117.33 117.33c38.24 27.15 86.38 43.34 138.67 43.34s100.43-16.19 138.67-43.34M394.67 394.67c-38.24-27.15-86.38-43.34-138.67-43.34s-100.43 16.19-138.67 43.34"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="32"
+      />
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeMiterlimit="10"
+        strokeWidth="32"
+        d="M256 48v416M464 256H48"
+      />
+    </svg>
+  );
+};
+
+export const CardPageviews = ({ className }) => {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+    >
+      <title>Eye</title>
+      <path
+        d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="32"
+      />
+      <circle
+        cx="256"
+        cy="256"
+        r="80"
+        fill="none"
+        stroke="currentColor"
+        strokeMiterlimit="10"
+        strokeWidth="32"
+      />
+    </svg>
+  );
+};
+
+export const CardBounceRate = ({ className }) => {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+    >
+      <title>Close</title>
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="32"
+        d="M368 368L144 144M368 144L144 368"
       />
     </svg>
   );
@@ -216,6 +370,83 @@ export const Laptop = ({ className }) => {
         strokeMiterlimit="10"
         strokeWidth="32"
         d="M16 416h480"
+      />
+    </svg>
+  );
+};
+
+//// CARD TRENDING ////
+export const TrendingUp = ({ className }) => {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+    >
+      <title>Trending Up</title>
+      <path
+        fill="none"
+        stroke="#78e0b5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="32"
+        d="M352 144h112v112"
+      />
+      <path
+        d="M48 368l121.37-121.37a32 32 0 0145.26 0l50.74 50.74a32 32 0 0045.26 0L448 160"
+        fill="none"
+        stroke="#78e0b5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="32"
+      />
+    </svg>
+  );
+};
+
+export const TrendingDown = ({ className }) => {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+    >
+      <title>Trending Down</title>
+      <path
+        fill="none"
+        stroke="#fd6a84"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="32"
+        d="M352 368h112V256"
+      />
+      <path
+        d="M48 144l121.37 121.37a32 32 0 0045.26 0l50.74-50.74a32 32 0 0145.26 0L448 352"
+        fill="none"
+        stroke="#fd6a84"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="32"
+      />
+    </svg>
+  );
+};
+
+export const LogoutButton = ({ className }) => {
+  return (
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+    >
+      <title>Logout</title>
+      <path
+        d="M320 176v-40a40 40 0 00-40-40H88a40 40 0 00-40 40v240a40 40 0 0040 40h192a40 40 0 0040-40v-40M384 176l80 80-80 80M191 256h273"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="32"
       />
     </svg>
   );

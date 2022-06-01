@@ -62,11 +62,12 @@
   &-right {
     @include flex;
 
-    // &__graph {
-    //   background-color: $color-accent-blue;
-    //   width: 50px;
-    //   height: 20px;
-    // }
+    &__graph {
+      width: 30px;
+      height: auto;
+      align-self: center;
+    }
+
     &__percent {
       color: $color-accent-green;
       align-self: flex-end;

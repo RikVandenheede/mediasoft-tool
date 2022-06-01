@@ -1,1 +1,1 @@
-export const menu = ["/", "/audience", "/social"];
+export const menu = ["/", "/audience", "/acquisition"];

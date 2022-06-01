@@ -62,4 +62,28 @@
       }
     }
   }
+
+  &-logout {
+    margin: auto 0 40px 0;
+    background-color: rgba(108, 93, 211, 0.1);
+    border-radius: 5px;
+    padding: 8px 9px 7px 10px;
+    transition: all 0.3s ease-in-out;
+
+    &__button {
+      height: auto;
+      width: 30px;
+      color: $color-primary;
+      transition: all 0.3s ease-in-out;
+    }
+
+    &:hover {
+      background-color: $color-primary;
+      cursor: pointer;
+
+      & .sidebar-logout__button {
+        color: $color-white;
+      }
+    }
+  }
 }

@@ -1,10 +1,12 @@
 import { NavLink } from "react-router-dom";
+import Cookie from "js-cookie";
 
 import {
   MainLogo,
   NavbarEye,
   NavbarUser,
-  NavbarSocial,
+  NavbarContract,
+  LogoutButton,
 } from "../../helpers/svg";
 import { menu } from "../../helpers/menu";
 
@@ -35,13 +37,16 @@ export const Sidebar = () => {
                   ) : menuItem === "/audience" ? (
                     <NavbarUser className="sidebar-navigation__listitem__svg" />
                   ) : (
-                    <NavbarSocial className="sidebar-navigation__listitem__svg" />
+                    <NavbarContract className="sidebar-navigation__listitem__svg" />
                   )}
                 </NavLink>
               </li>
             );
           })}
         </ul>
+      </section>
+      <section className="sidebar-logout">
+        <LogoutButton className="sidebar-logout__button" />
       </section>
     </nav>
   );
