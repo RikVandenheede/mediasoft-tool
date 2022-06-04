@@ -4,6 +4,7 @@ import { DoughnutChart } from "../components/atoms/DoughnutChart";
 
 import { Layout } from "../components/molecules/Layout";
 import { Table } from "../components/molecules/Table";
+
 import {
   DivicesLoader,
   GenderLoader,
@@ -11,7 +12,6 @@ import {
   TableRowLoaderSmall,
 } from "../helpers/loaders";
 import { report } from "../helpers/report";
-
 import { Phone, Tablet, Laptop } from "../helpers/svg";
 import { useLoggedIn } from "../helpers/useLoggedIn";
 import { percetageFormatter } from "../helpers/percentageFormatter";

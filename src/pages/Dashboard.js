@@ -6,11 +6,11 @@ import { TableHeader } from "../components/atoms/TableHeader";
 
 import { Layout } from "../components/molecules/Layout";
 import { Table } from "../components/molecules/Table";
-import { OverviewGridLoader } from "../helpers/loaders";
 
 import { report } from "../helpers/report";
 import { timeFormatter } from "../helpers/timeFormatter";
 import { useLoggedIn } from "../helpers/useLoggedIn";
+import { OverviewGridLoader } from "../helpers/loaders";
 import { TableRowLoaderPages } from "../helpers/loaders";
 
 export const Dashboard = () => {
@@ -54,6 +54,7 @@ export const Dashboard = () => {
           )
         )
         .catch((e) => console.log(e));
+
       report({
         dimensions: ["ga:date"],
         metrics: [
@@ -74,6 +75,7 @@ export const Dashboard = () => {
           )
         )
         .catch((e) => console.log(e));
+
       report({
         metrics: [
           "ga:users",

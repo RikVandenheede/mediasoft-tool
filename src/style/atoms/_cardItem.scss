@@ -33,7 +33,8 @@
       height: 50px;
       left: -20px;
       top: 30px;
-      background: linear-gradient(90deg, #00ccff, #d400d4);
+      background: linear-gradient(90deg, #a0abda, $color-accent-blue);
+      // background: linear-gradient(90deg, #00ccff, #d400d4);
       animation: spin 3s linear infinite;
       z-index: -2;
     }

@@ -3,7 +3,6 @@
 @import "./utils/general";
 @import "./utils/fonts";
 @import "./utils/colors";
-@import "./utils/breakpoints";
 @import "./utils/animations";
 
 //// ATOMS ////
@@ -17,5 +16,4 @@
 //// PAGES ////
 @import "./pages/dashboard";
 @import "./pages/audience";
-@import "./pages/social";
 @import "./pages/acquisition";
