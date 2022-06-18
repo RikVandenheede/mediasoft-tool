@@ -9,14 +9,12 @@ import { Acquisition } from "./pages/Acquisition";
 
 //// STYLE ////
 import "./style/main.scss";
-import { Example } from "./pages/Exaample";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route exact path="/example" element={<Example />} />
         <Route exact path="/" element={<Dashboard />} />
         <Route exact path="/audience" element={<Audience />} />
         <Route exact path="/acquisition" element={<Acquisition />} />

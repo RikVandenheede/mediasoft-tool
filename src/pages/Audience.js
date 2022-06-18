@@ -14,7 +14,10 @@ import {
 import { report } from "../helpers/report";
 import { Phone, Tablet, Laptop } from "../helpers/svg";
 import { useLoggedIn } from "../helpers/useLoggedIn";
-import { percetageFormatter } from "../helpers/percentageFormatter";
+import {
+  percetageFormatter,
+  percetageFormatterAudience,
+} from "../helpers/percentageFormatter";
 import { timeFormatter } from "../helpers/timeFormatter";
 
 export const Audience = () => {
@@ -83,7 +86,7 @@ export const Audience = () => {
             res?.result?.reports[0].data?.rows.map((device) => {
               return {
                 name: device.dimensions[0],
-                value: device.metrics[0].values[0],
+                value: [percetageFormatter(device.metrics[0].values[0], res)],
               };
             })
           )

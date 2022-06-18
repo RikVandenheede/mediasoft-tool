@@ -1,14 +1,24 @@
-export const TableRow = ({ className, row }) => {
+import React from "react";
+import Tooltip from "rc-tooltip";
+
+import "rc-tooltip/assets/bootstrap.css";
+
+export const TableRow = ({ className, row, tooltip }) => {
   const widthFormatter = (width) => {
     if (width === 0) return 0;
     return width * 1.5;
     //  row?.width * 1.5
   };
-
   return (
     <div className={className}>
       <div className={`${className}__title`}>
-        <p>{row?.name}</p>
+        {!tooltip ? (
+          <p>{row?.name}</p>
+        ) : (
+          <Tooltip placement="top" overlay={row?.name}>
+            <p>{row?.name}</p>
+          </Tooltip>
+        )}
       </div>
       <div className={`${className}__container`}>
         {row?.width >= 0 && (

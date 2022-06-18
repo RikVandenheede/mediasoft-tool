@@ -10,8 +10,12 @@ import { Table } from "../components/molecules/Table";
 import { report } from "../helpers/report";
 import { timeFormatter } from "../helpers/timeFormatter";
 import { useLoggedIn } from "../helpers/useLoggedIn";
-import { OverviewGridLoader } from "../helpers/loaders";
-import { TableRowLoaderPages } from "../helpers/loaders";
+import {
+  OverviewGridLoader,
+  GraphLoader,
+  TableRowLoaderPages,
+  VisitsLoader,
+} from "../helpers/loaders";
 
 export const Dashboard = () => {
   const [date, setDate] = useState("7");
@@ -205,10 +209,14 @@ export const Dashboard = () => {
                   })}
                 </div>
               )}
-              <div className="dashboard-overview-container__graph">
-                <TableHeader className="table-header" title={active} />
-                <LineChart tableData={tableData} active={active} />
-              </div>
+              {gridMetrics.length === 0 ? (
+                <GraphLoader />
+              ) : (
+                <div className="dashboard-overview-container__graph">
+                  <TableHeader className="table-header" title={active} />
+                  <LineChart tableData={tableData} active={active} />
+                </div>
+              )}
             </section>
           </section>
           <section className="dashboard-bottom">
@@ -224,18 +232,24 @@ export const Dashboard = () => {
                   title="Pages"
                   categories={tableHeaderCategories}
                   data={pages}
+                  tooltip
                 />
               )}
             </div>
             <div>
               <h2 className="dashboard-bottom__title">Visits today</h2>
-              <div className="dashboard-bottom__live-container">
-                <div className="dashboard-bottom__live">
-                  <span>{visitsToday}</span>
-                </div>
+              {console.log(visitsToday)}
+              {visitsToday.length === 0 ? (
+                <VisitsLoader />
+              ) : (
+                <div className="dashboard-bottom__live-container">
+                  <div className="dashboard-bottom__live">
+                    <span>{visitsToday}</span>
+                  </div>
 
-                {/* <div></div> */}
-              </div>
+                  {/* <div></div> */}
+                </div>
+              )}
             </div>
           </section>
         </Layout>

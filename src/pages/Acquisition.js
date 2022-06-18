@@ -6,6 +6,7 @@ import { Table } from "../components/molecules/Table";
 import { useLoggedIn } from "../helpers/useLoggedIn";
 import { timeFormatter } from "../helpers/timeFormatter";
 import { report } from "../helpers/report";
+import { TableRowLoaderAcquisition } from "../helpers/loaders";
 
 export const Acquisition = () => {
   const isSignedIn = useLoggedIn();
@@ -98,10 +99,10 @@ export const Acquisition = () => {
 
   return (
     <>
-      {console.log(social)}
+      {/* {console.log(social)}
       {console.log(organic)}
       {console.log(direct)}
-      {console.log(other)}
+      {console.log(other)} */}
       {/* {console.log(tableData)} */}
       {!isSignedIn ? (
         <>
@@ -111,35 +112,51 @@ export const Acquisition = () => {
         <Layout className="acquisition" title="Acquisition" setDate={setDate}>
           <section className="acquisition__socials">
             <h2>Socials</h2>
-            <Table
-              className="acquisition-table"
-              categories={tableHeaderCategories}
-              data={social.sort((a, b) => b.values[0] - a.values[0])}
-            />
+            {social.length === 0 ? (
+              <TableRowLoaderAcquisition />
+            ) : (
+              <Table
+                className="acquisition-table"
+                categories={tableHeaderCategories}
+                data={social.sort((a, b) => b.values[0] - a.values[0])}
+              />
+            )}
           </section>
           <section className="acquisition__organic">
             <h2>Organic</h2>
-            <Table
-              className="acquisition-table"
-              categories={tableHeaderCategories}
-              data={organic.sort((a, b) => b.values[0] - a.values[0])}
-            />
+            {organic.length === 0 ? (
+              <TableRowLoaderAcquisition />
+            ) : (
+              <Table
+                className="acquisition-table"
+                categories={tableHeaderCategories}
+                data={organic.sort((a, b) => b.values[0] - a.values[0])}
+              />
+            )}
           </section>
           <section className="acquisition__direct">
             <h2>Direct</h2>
-            <Table
-              className="acquisition-table"
-              categories={tableHeaderCategories}
-              data={direct.sort((a, b) => b.values[0] - a.values[0])}
-            />
+            {direct.length === 0 ? (
+              <TableRowLoaderAcquisition />
+            ) : (
+              <Table
+                className="acquisition-table"
+                categories={tableHeaderCategories}
+                data={direct.sort((a, b) => b.values[0] - a.values[0])}
+              />
+            )}
           </section>
           <section className="acquisition__others">
             <h2>Others</h2>
-            <Table
-              className="acquisition-table"
-              categories={tableHeaderCategories}
-              data={other.sort((a, b) => b.values[0] - a.values[0])}
-            />
+            {other.length === 0 ? (
+              <TableRowLoaderAcquisition />
+            ) : (
+              <Table
+                className="acquisition-table"
+                categories={tableHeaderCategories}
+                data={other.sort((a, b) => b.values[0] - a.values[0])}
+              />
+            )}
           </section>
         </Layout>
       )}

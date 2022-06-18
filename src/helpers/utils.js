@@ -33,6 +33,7 @@ export const renderButton = () => {
 
 const onSuccess = (googleUser) => {
   console.log("Logged in as: " + googleUser.getBasicProfile().getName());
+  window.location.reload(false);
 };
 
 const onFailure = (error) => {

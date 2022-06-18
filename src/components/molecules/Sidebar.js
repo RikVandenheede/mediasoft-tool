@@ -11,6 +11,8 @@ import {
 import { menu } from "../../helpers/menu";
 
 export const Sidebar = () => {
+  console.log(document.cookie);
+
   return (
     <nav className="sidebar">
       <section className="sidebar-logo">

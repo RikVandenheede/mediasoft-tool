@@ -105,6 +105,29 @@ export const TableRowLoaderPages = () => (
   </ContentLoader>
 );
 
+export const TableRowLoaderAcquisition = () => (
+  <ContentLoader viewBox="0 0 1240 150">
+    {/* Only SVG shapes */}
+    <rect x="0" y="0" rx="5" ry="5" width="1240" height="45" />
+
+    <rect x="10" y="62" rx="5" ry="5" width="40" height="15" />
+    <rect x="570" y="62" rx="3" ry="3" width="30" height="15" />
+    <rect x="670" y="62" rx="3" ry="3" width="20" height="15" />
+    <rect x="770" y="62" rx="3" ry="3" width="20" height="15" />
+    <rect x="900" y="62" rx="3" ry="3" width="30" height="15" />
+    <rect x="1040" y="62" rx="3" ry="3" width="15" height="15" />
+    <rect x="1170" y="62" rx="3" ry="3" width="20" height="15" />
+
+    <rect x="10" y="112" rx="5" ry="5" width="40" height="15" />
+    <rect x="570" y="112" rx="3" ry="3" width="30" height="15" />
+    <rect x="670" y="112" rx="3" ry="3" width="20" height="15" />
+    <rect x="770" y="112" rx="3" ry="3" width="20" height="15" />
+    <rect x="900" y="112" rx="3" ry="3" width="30" height="15" />
+    <rect x="1040" y="112" rx="3" ry="3" width="15" height="15" />
+    <rect x="1170" y="112" rx="3" ry="3" width="20" height="15" />
+  </ContentLoader>
+);
+
 export const DivicesLoader = () => (
   <ContentLoader viewBox="0 0 380 300">
     {/* Only SVG shapes */}
@@ -130,5 +153,19 @@ export const GenderLoader = () => (
   <ContentLoader width="408" height="332">
     {/* Only SVG shapes */}
     <circle cx="200" cy="180" r="150" width="20" height="15" />
+  </ContentLoader>
+);
+
+export const GraphLoader = () => (
+  <ContentLoader width="816" height="332">
+    {/* Only SVG shapes */}
+    <rect x="0" y="0" width="816" height="332" />
+  </ContentLoader>
+);
+
+export const VisitsLoader = () => (
+  <ContentLoader viewBox="0 0 380 300">
+    {/* Only SVG shapes */}
+    <circle cx="200" cy="150" r="87.5" width="175" height="175" />
   </ContentLoader>
 );

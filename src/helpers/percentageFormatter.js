@@ -1,4 +1,7 @@
 export const percetageFormatter = (currentVlue, totalArray) => {
+  console.log("curretnvalue", currentVlue);
+  console.log("totalArry", totalArray);
+
   let percentage = 0;
   let totalCount = 0;
 

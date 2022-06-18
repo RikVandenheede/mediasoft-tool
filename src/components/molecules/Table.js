@@ -4,7 +4,7 @@ import { TableRow } from "../atoms/TableRow";
 import { TableRowLoaderSmall } from "../../helpers/loaders";
 
 //// Object bstaat uit {name: "", values: [{}]} ////
-export const Table = ({ title, categories, data, className }) => {
+export const Table = ({ title, categories, data, className, tooltip }) => {
   return (
     <div className={`${className} table`}>
       <TableHeader
@@ -18,6 +18,7 @@ export const Table = ({ title, categories, data, className }) => {
             key={i}
             className={`${className} table-body__row`}
             row={row}
+            tooltip={tooltip}
           />
         ))}
       </div>
