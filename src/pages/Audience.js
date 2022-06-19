@@ -30,6 +30,12 @@ export const Audience = () => {
   const isSignedIn = useLoggedIn();
 
   useEffect(() => {
+    setDevices([]);
+    setCountries([]);
+    setLanguages([]);
+    setGender([]);
+    setAges([]);
+
     setTimeout(() => {
       report({
         dimensions: ["ga:userAgeBracket"],

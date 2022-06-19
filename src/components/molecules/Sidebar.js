@@ -11,12 +11,14 @@ import {
 import { menu } from "../../helpers/menu";
 
 export const Sidebar = () => {
-  console.log(document.cookie);
+  // console.log(document.cookie);
 
   return (
     <nav className="sidebar">
       <section className="sidebar-logo">
-        <MainLogo className="sidebar-logo__svg" />
+        <a href="/" className="sidebar-logo">
+          <MainLogo className="sidebar-logo__svg" />
+        </a>
       </section>
       <span className="sidebar__divider"></span>
 
@@ -47,9 +49,9 @@ export const Sidebar = () => {
           })}
         </ul>
       </section>
-      <section className="sidebar-logout">
+      {/* <section className="sidebar-logout">
         <LogoutButton className="sidebar-logout__button" />
-      </section>
+      </section> */}
     </nav>
   );
 };

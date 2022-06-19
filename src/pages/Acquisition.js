@@ -17,6 +17,11 @@ export const Acquisition = () => {
   const [other, setother] = useState([]);
 
   useEffect(() => {
+    setOrganic([]);
+    setSocial([]);
+    setDirect([]);
+    setother([]);
+
     setTimeout(() => {
       report({
         dimensions: ["ga:acquisitionSource"],
@@ -110,6 +115,8 @@ export const Acquisition = () => {
         </>
       ) : (
         <Layout className="acquisition" title="Acquisition" setDate={setDate}>
+          {console.log(date)}
+          {console.log(social.length)}
           <section className="acquisition__socials">
             <h2>Socials</h2>
             {social.length === 0 ? (

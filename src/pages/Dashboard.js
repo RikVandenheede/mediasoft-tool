@@ -29,6 +29,12 @@ export const Dashboard = () => {
   const [visitsToday, setVisitsToday] = useState([]);
 
   useEffect(() => {
+    setPages([]);
+    setGridMetrics([]);
+    setCurrent([]);
+    setTableData([]);
+    setVisitsToday([]);
+
     setTimeout(() => {
       // PAGES; ////
       report({
